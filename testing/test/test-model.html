@@ -30,17 +30,14 @@
 
   test('attribute setting/getting', function() {
     var m = new app.Model();
+
+    equal( m.get('key'), undefined );
     m.set( 'key', 'value' );
     equal( m.get('key'), 'value' );
   });
 
   test('change events', function() {
     var m = new app.Model();
-    var handler = function( obj ) {
-      return function(data) {
-        obj
-      }
-    };
 
     var changeSpy = sinon.spy();
     var keyChangeSpy = sinon.spy();
