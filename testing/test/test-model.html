@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Test</title>
+
+  <link rel="stylesheet" href="../www/lib/qunit/qunit.css" media="screen">
+
+  <script src="../www/lib/jquery/jquery.js"></script>
+  <script src="../www/lib/underscore/underscore.js"></script>
+  <script src="../www/lib/rsvp.js"></script>
+
+  <script src="../www/lib/qunit/qunit.js"></script>
+  <script src="../www/lib/sinon.js"></script>
+
+  <script src="../www/js/model.js"></script>
+
+</head>
+<body>
+  <h1 id="qunit-header">Test Suite</h1>
+  <h2 id="qunit-banner"></h2>
+  <div id="qunit-testrunner-toolbar"></div>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture">
+  </div>
+
+  <script>
+  module( 'model' );
+
+  test('attribute setting/getting', function() {
+    var m = new app.Model();
+    m.set( 'key', 'value' );
+    equal( m.get('key'), 'value' );
+  });
+
+  test('change events', function() {
+    var m = new app.Model();
+    var handler = function( obj ) {
+      return function(data) {
+        obj
+      }
+    };
+
+    var changeSpy = sinon.spy();
+    var keyChangeSpy = sinon.spy();
+
+    m.on( 'change', function( data ) {
+      equal( data.key, 'key' );
+      equal( data.value, 'value' );
+    });
+
+    m.on( 'change:key', function( data ) {
+      equal( data.key, 'key' );
+      equal( data.value, 'value' );
+    });
+
+    m.set( 'key', 'value' );
+  });
+  </script>
+</body>
+</html>
