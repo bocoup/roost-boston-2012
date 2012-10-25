@@ -1,4 +1,6 @@
-# traditional code
+# writing testable javascript
+
+## traditional code
 
 - difficult to unit test -- why?
   - anonymous functions
@@ -10,7 +12,7 @@
   - they don't help with design
   - really just smoke tests
 
-# what is a unit test?
+## what is a unit test?
 
 - a test simply determines whether something is true
 - myUnit.js -- a stupid simple test framework
@@ -18,7 +20,7 @@
 - a test for fizzbuzz
 - refactoring!
 
-# how do we rethink traditional code?
+## how do we rethink traditional code?
 
 - we can break our functionality into a few concepts
   - setup
@@ -34,7 +36,7 @@
   - no anonymous functions
   - loosely coupled: single responsibility
 
-# rewriting
+## rewriting
 
 - we'll break our code into a few pieces
   - views
@@ -53,7 +55,7 @@
   - promotes loose coupling
   - you'll be surprised how well it works
 
-## testing concepts
+### testing concepts
 
 - basic test
   - input -> output
@@ -68,4 +70,4 @@
 - async
   - views/searchResults.js
 
-# automating
+## automating
