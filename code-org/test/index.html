@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit Test Suite</title>
+  <link rel="stylesheet" href="../www/lib/qunit/qunit.css">
+  <script src="../www/lib/qunit/qunit.js"></script>
+
+  <script data-main="config" src="../www/lib/require.js"></script>
+
+  <script type="text/javascript">
+    window.addEventListener("load", function onLoad() {
+      QUnit.config.autostart = false;
+
+      setTimeout(function () {
+        require(['test'], function () {
+          //now trigger them.
+          QUnit.start();
+        });
+
+      }, 10);
+      window.removeEventListener("load", onLoad, true);
+    }, true);
+  </script>
+</head>
+<body>
+  <h1 id="qunit-header">Test Suite</h1>
+  <h2 id="qunit-banner"></h2>
+  <div id="qunit-testrunner-toolbar"></div>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture">
+  </div>
+
+  <script>
+  // your tests here!
+  </script>
+</body>
+</html>
