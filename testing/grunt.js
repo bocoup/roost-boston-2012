@@ -6,10 +6,10 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     lint: {
-      files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js', '! test/lib/**/*.js', 'www/js/**/*.js']
+      files: ['lib/**/*.js', 'test/**/*.js', '! test/lib/**/*.js', 'www/js/**/*.js']
     },
     qunit: {
-      files: ['test/**/*.html']
+      files: ['test/**/test-*.html']
     },
     watch: {
       files: '<config:lint.files>',
