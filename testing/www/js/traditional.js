@@ -1,21 +1,8 @@
 $(function() {
 
-  var _templateCache = {};
-
   var resultsList = $( '#results' );
   var liked = $( '#liked' );
   var pending = false;
-
-  function getTemplate( name ) {
-    if ( _templateCache[ name ] ) {
-      return _templateCache[ name ];
-    }
-
-    return $.get( '/templates/' + name ).pipe(function( tmpl ) {
-      _templateCache[ name ] = _.template( tmpl );
-      return _templateCache[ name ];
-    });
-  }
 
   $( '#searchForm' ).on( 'submit', function( e ) {
     e.preventDefault();
@@ -29,19 +16,14 @@ $(function() {
 
     pending = true;
 
-    var req = $.ajax( '/data/search.json', {
+    $.ajax( '/data/search.json', {
       data : { q: query },
-      dataType : 'json'
-    });
-
-    var tmpl = getTemplate( 'people-detailed.tmpl' );
-
-    $.when( tmpl, req ).done(function( tmpl, data ) {
-      var people = data[ 0 ].results;
-
-      resultsList.html( tmpl( { people : people } ) );
-
-      pending = false;
+      dataType : 'json',
+      success : function( data ) {
+        var tmpl = _.template( $('#tmpl-people-detailed').text() );
+        resultsList.html( tmpl({ people : data.results }) );
+        pending = false;
+      }
     });
 
     $('<li>', {
