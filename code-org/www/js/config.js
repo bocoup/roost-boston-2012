@@ -3,7 +3,6 @@ require.config({
   deps : [ 'main' ],
   paths : {
     'jquery' : '../lib/jquery',
-    'rsvp' : '../lib/rsvp',
     'backbone' : '../lib/backbone',
     'underscore' : '../lib/underscore'
   },

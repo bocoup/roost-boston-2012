@@ -30,18 +30,19 @@
 - expose limited API
 - return function, object, constructor
 
-## require.config
+## examples
+
+- reworking an existing app to use requirejs
+  - loading underscore, backbone via `shim`
+- using requirejs to load templates
+
+## builds
+
+- generating production-ready builds
+
+### require.config
 
 - `baseUrl`
 - `deps`
 - `shim`
 - `paths`
-
-## examples
-
-- jquery
-- underscore / backbone via `shim`
-- jquery plugin via `shim`
-- custom namespaces
-
-## exercises
