@@ -2,7 +2,7 @@ window.CatFinder = window.CatFinder || {};
 
 CatFinder.Router = Backbone.Router.extend({
   routes: {
-    '': 'search'
+    "": "search"
   },
 
   search: function() {

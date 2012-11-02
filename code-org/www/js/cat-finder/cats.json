@@ -1,1 +1,5 @@
-cats.json
+[
+  { "name": "Myster", "type": "black" },
+  { "name": "Sap", "type": "tortoise" },
+  { "name": "Max", "type": "siamese" }
+]
