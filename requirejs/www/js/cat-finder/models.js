@@ -6,7 +6,9 @@ CatFinder.Collections = {};
 CatFinder.Models.Cat = Backbone.Model.extend();
 
 CatFinder.Collections.Cats = Backbone.Collection.extend({
-  model: CatFinder.Models.Cat
+  model: CatFinder.Models.Cat,
+
+  url: 'js/cat-finder/cats.json'
 });
 
 CatFinder.Models.App = Backbone.Model.extend({
