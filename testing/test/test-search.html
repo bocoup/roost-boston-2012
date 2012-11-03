@@ -44,11 +44,15 @@
     requests[0].respond(
       200,
       { "Content-type" : "text/json" },
-      JSON.stringify( { results : [] } )
+      JSON.stringify( { results : [ 'cat' ] } )
     );
 
     equal( requests[0].url, '/data/search.json?q=cat' );
     ok( result.then, 'result is a promise' );
+
+    result.done(function( data ) {
+      equal( data[0], 'cat' );
+    });
   });
   </script>
 </body>

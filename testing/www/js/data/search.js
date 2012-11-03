@@ -7,9 +7,11 @@ app.Search = (function() {
     fetch : function( query ) {
       return $.getJSON( '/data/search.json', {
         q : query
-      }).pipe(function( resp ) {
-        return resp.results;
-      });
+      }).pipe( $.proxy( this, '_process') );
+    },
+
+    _process : function( resp ) {
+      return resp.results;
     }
   };
 
