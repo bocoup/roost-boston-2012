@@ -5,7 +5,11 @@ app.Search = (function() {
 
   Search.prototype = {
     fetch : function( query ) {
-      return $.getJSON( '/data/search.json', { q : query } );
+      return $.getJSON( '/data/search.json', {
+        q : query
+      }).pipe(function( resp ) {
+        return resp.results;
+      });
     }
   };
 

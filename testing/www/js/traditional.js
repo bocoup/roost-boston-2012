@@ -32,11 +32,6 @@ $(function() {
     }).appendTo( resultsList.empty() );
   });
 
-  resultsList.on( 'click', '.remove', function( e ) {
-    e.preventDefault();
-    $( this ).closest( 'li' ).remove();
-  });
-
   resultsList.on( 'click', '.like', function(e) {
     e.preventDefault();
     var name = $( this ).closest( 'li' ).find( 'h2' ).text();

@@ -11,12 +11,13 @@
   - integration tests are slow
   - they don't help with design
   - really just smoke tests
+  - [demo integration tests]
 
 ## what is a unit test?
 
 - a test simply determines whether something is true
 - myUnit.js -- a stupid simple test framework
-  - everything else is just sugar!
+  - anything fancier is just sugar!
 - a test for fizzbuzz
 - refactoring!
 
@@ -29,7 +30,7 @@
   - application state
   - brokering
 
-- we can write different pieces using a few rules
+- we can write different pieces using a few guiding principles
   - constructors, not literals
   - configurable selectors
   - simple methods: input -> output
@@ -37,6 +38,13 @@
   - loosely coupled: single responsibility
 
 ## rewriting
+
+- we are somewhat artificially not using a framework like backbone etc.
+
+- test first
+  - aids in design
+  - promotes loose coupling
+  - you'll be surprised how well it works
 
 - we'll break our code into a few pieces
   - views
@@ -49,11 +57,6 @@
     - model.js
   - setup & brokering (controller?)
     - app.js
-
-- test first
-  - aids in design
-  - promotes loose coupling
-  - you'll be surprised how well it works
 
 ### testing concepts
 
@@ -71,3 +74,7 @@
   - views/searchResults.js
 
 ## automating
+
+- grunt
+- qunit config in grunt.js
+- grunt qunit
