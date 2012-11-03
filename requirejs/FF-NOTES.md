@@ -12,17 +12,26 @@
     - text
 - production builds
 
-## amd format
+## traditional application
 
-    define([ 'dependencyA', 'dependencyB' ], function( a, b ) {
+- organized, but ...
+- global namespace
+- lots of script tags
+- no expression of dependencies
+- how to build for production?
+- amd to the rescue
+
+```
+define([ 'dependencyA', 'dependencyB' ], function( a, b ) {
+  // ...
+
+  return {
+    myMethod : function() {
       // ...
-
-      return {
-        myMethod : function() {
-          // ...
-        }
-      };
-    });
+    }
+  };
+});
+```
 
 ## module pattern refresher
 
@@ -30,19 +39,20 @@
 - expose limited API
 - return function, object, constructor
 
-## examples
+## reworking our existing app
 
-- reworking an existing app to use requirejs
-  - loading underscore, backbone via `shim`
-- using requirejs to load templates
+- app code
+    - require.config
+        - `baseUrl`
+        - `deps`
+        - `paths`
+        - `shim`
+- jquery
+- underscore, backbone via `shim`
+- template plugin
 
 ## builds
 
-- generating production-ready builds
-
-### require.config
-
-- `baseUrl`
-- `deps`
-- `shim`
-- `paths`
+- grunt
+- configuration via grunt.js
+- `grunt requirejs` to create the build
