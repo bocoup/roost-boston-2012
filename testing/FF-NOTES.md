@@ -54,15 +54,19 @@ www/js/traditional.js
 
 - we'll break our code into a few pieces
   - www/js/views/
-    - likes.js
-    - searchForm.js\*
-    - searchResults.js
+    - likes.js\*
+    - searchForm.js
+    - searchResults.js\*
   - www/js/data/
     - search.js\*
   - www/js/
     - app.js (app model)
     - main.js (setup & brokering)
     - util.js (template loading)\*
+
+### example: likes view
+
+- can we add a new like?
 
 ### example: search results
 
@@ -84,6 +88,16 @@ www/js/traditional.js
 - concepts:
   - ajax mocking
   - don't test the server!
+
+### example: template loading
+
+- we still don't want to hit the server, so ...
+  - generate template fixture
+- do we hit the right URL?
+- do we return a promise?
+- does the response get processed correctly?
+- concepts:
+  - generated fixture
 
 ## automating
 
