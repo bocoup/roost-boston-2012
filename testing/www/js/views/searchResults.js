@@ -23,8 +23,12 @@ app.SearchResults = (function() {
 
   SearchResults.prototype._handleLike = function( evt ) {
     evt.preventDefault();
-    var name = $( evt.currentTarget ).attr( 'data-name' );
+    var name = this._getName( evt.currentTarget );
     this.app.add( 'liked', name );
+  };
+
+  SearchResults.prototype._getName = function( el ) {
+    return $( el ).closest( 'li' ).attr( 'data-name' );
   };
 
   return SearchResults;

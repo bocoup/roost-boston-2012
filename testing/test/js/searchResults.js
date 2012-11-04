@@ -65,3 +65,16 @@ test('no results', function() {
     start();
   });
 });
+
+test('get name', function() {
+  var results = new app.SearchResults({
+    el : '#results',
+    app : appModel
+  });
+
+  results.set( [ data[0] ] ).done(function() {
+    console.log( $('#results').html() );
+    var name = results._getName( $('#results a.like').first() );
+    equal( name, data[0].name );
+  });
+});
