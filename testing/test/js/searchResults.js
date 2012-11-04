@@ -45,7 +45,6 @@ test('individual result is correct', function() {
 
     equal( result.find( 'h2' ).html(), person.name, 'Name is displayed' );
     ok( result.find( '.btn.like' ).length, 'Like button is displayed' );
-    ok( result.find( '.btn.remove' ).length, 'Remove button is displayed' );
     ok( result.html().match( person.company.name ), 'Company name is displayed' );
     ok( result.html().match( person.email ), 'Email is displayed' );
     start();
