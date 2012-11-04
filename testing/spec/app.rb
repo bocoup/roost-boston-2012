@@ -50,11 +50,4 @@ class Srchr < MiniTest::Unit::TestCase
     assert_equal find('#results li h2').text, find('#liked li').text
   end
 
-  def test_remove
-    fill_in('q', :with => 'cat')
-    find('.btn').click
-    to_be_removed = find('#results li h2').text
-    find('.remove').click
-    assert( find('#results').has_no_content?(to_be_removed) )
-  end
 end
