@@ -1,4 +1,14 @@
-var xhr;
+/*global
+  test:true,
+  module:true,
+  ok:true,
+  equal:true,
+  sinon:true,
+  stop:true,
+  start:true
+*/
+
+var xhr, requests;
 
 module('search data', {
   setup : function() {

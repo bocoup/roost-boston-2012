@@ -1,3 +1,13 @@
+/*global
+  test:true,
+  module:true,
+  ok:true,
+  equal:true,
+  sinon:true,
+  stop:true,
+  start:true
+*/
+
 module( 'search form' );
 
 test('search form sets search term on app model', function() {
