@@ -22,7 +22,6 @@ $(function() {
   });
 
   appModel.on( 'change:liked', function( evt ) {
-    console.log(evt.value)
     likes.add( _.last( evt.value ) );
   });
 });
