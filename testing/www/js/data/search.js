@@ -3,16 +3,14 @@ var app = window.app = window.app || {};
 app.Search = (function() {
   var Search = function() {};
 
-  Search.prototype = {
-    fetch : function( query ) {
-      return $.getJSON( '/data/search.json', {
-        q : query
-      }).pipe( $.proxy( this, '_process') );
-    },
+  var processResults = function( resp ) {
+    return resp.results;
+  };
 
-    _process : function( resp ) {
-      return resp.results;
-    }
+  Search.prototype.fetch = function( query ) {
+    return $.getJSON( '/data/search.json', {
+      q : query
+    }).pipe( processResults );
   };
 
   return Search;

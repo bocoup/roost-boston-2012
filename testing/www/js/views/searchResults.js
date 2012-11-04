@@ -11,23 +11,20 @@ app.SearchResults = (function() {
     RSVP.EventTarget.mixin(this);
   };
 
-  SearchResults.prototype = {
-    set : function( people ) {
-      var $el = this.$el;
-      $el.empty();
+  SearchResults.prototype.set = function( people ) {
+    var $el = this.$el;
+    $el.empty();
 
-      return app.loadTemplate( 'people-detailed.tmpl' ).done(function( t ) {
-        var html = t( { people : people } );
-        $el.html( html );
-      });
-    },
+    return app.loadTemplate( 'people-detailed.tmpl' ).done(function( t ) {
+      var html = t( { people : people } );
+      $el.html( html );
+    });
+  };
 
-    _handleLike : function( evt ) {
-      evt.preventDefault();
-      var name = $( evt.currentTarget ).attr('data-name');
-      this.app.add( 'liked', name );
-    }
-
+  SearchResults.prototype._handleLike = function( evt ) {
+    evt.preventDefault();
+    var name = $( evt.currentTarget ).attr('data-name');
+    this.app.add( 'liked', name );
   };
 
   return SearchResults;

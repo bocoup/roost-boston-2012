@@ -9,12 +9,10 @@ app.SearchForm = (function() {
     RSVP.EventTarget.mixin( this );
   };
 
-  SearchForm.prototype = {
-    handleSearch : function( evt ) {
-      evt.preventDefault();
-      var term = $.trim( this.$el.find( 'input[name="q"]' ).val() );
-      this.app.set( 'searchTerm', term );
-    }
+  SearchForm.prototype.handleSearch = function( evt ) {
+    evt.preventDefault();
+    var term = $.trim( this.$el.find( 'input[name="q"]' ).val() );
+    this.app.set( 'searchTerm', term );
   };
 
   return SearchForm;
