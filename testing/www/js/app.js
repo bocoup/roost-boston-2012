@@ -1,28 +1,24 @@
-$(function() {
-  var appModel = new app.Model();
+var app = window.app = window.app || {};
 
-  var searchForm = new app.SearchForm({
-    el : '#searchForm',
-    app : appModel
-  });
+app.Model = (function() {
+  var Model = function() {
+    this._attributes = {};
+    RSVP.EventTarget.mixin( this );
+  };
 
-  var likes = new app.Likes( { el : '#liked' } );
+  Model.prototype = {
+    set : function( k, v ) {
+      var old = this._attributes[ k ];
+      var changeData = { key : k, value : v };
+      this._attributes[ k ] = v;
+      this.trigger( 'change', changeData );
+      this.trigger( 'change:' + k, changeData );
+    },
 
-  var results = new app.SearchResults({
-    el : '#results',
-    app : appModel
-  });
+    get : function( k ) {
+      return this._attributes[ k ];
+    }
+  };
 
-  var data = new app.Search();
-
-  appModel.on( 'change:searchTerm', function( evt ) {
-    data.fetch( evt.value ).done(function( resp ) {
-      results.set( resp );
-    });
-  });
-
-  appModel.on( 'change:liked', function( evt ) {
-    console.log(evt.value)
-    likes.add( _.last( evt.value ) );
-  });
-});
+  return Model;
+}());

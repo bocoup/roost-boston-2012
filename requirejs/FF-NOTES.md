@@ -33,6 +33,21 @@ define([ 'dependencyA', 'dependencyB' ], function( a, b ) {
 });
 ```
 
+```
+define(function( require ) {
+  var a = require( 'dependencyA' );
+  var b = require( 'dependencyB' );
+
+  // ...
+
+  return {
+    myMethod : function() {
+      // ...
+    }
+  };
+});
+```
+
 ## module pattern refresher
 
 - private variables

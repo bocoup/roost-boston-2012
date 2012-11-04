@@ -1,6 +1,13 @@
 # writing testable javascript
 
+- installing the node dependencies: `npm install`
+- starting the server: `node server`
+- running the integration tests: `ruby spec/*.rb`
+  - you'll need ruby, rubygems, and bundler
+
 ## traditional code
+
+www/js/traditional.js
 
 - difficult to unit test -- why?
   - anonymous functions
@@ -16,7 +23,7 @@
 ## what is a unit test?
 
 - a test simply determines whether something is true
-- myUnit.js -- a stupid simple test framework
+- www/lib/myUnit.js -- a stupid simple test framework
   - anything fancier is just sugar!
 - a test for fizzbuzz
 - refactoring!
@@ -24,11 +31,10 @@
 ## how do we rethink traditional code?
 
 - we can break our functionality into a few concepts
-  - setup
   - presentation / user interaction
   - server communication
   - application state
-  - brokering
+  - setup & brokering
 
 - we can write different pieces using a few guiding principles
   - constructors, not literals
@@ -47,34 +53,41 @@
   - you'll be surprised how well it works
 
 - we'll break our code into a few pieces
-  - views
+  - www/js/views/
     - likes.js
-    - searchForm.js
+    - searchForm.js\*
     - searchResults.js
-  - server communication
-    - search.js
-  - application state
-    - model.js
-  - setup & brokering (controller?)
-    - app.js
+  - www/js/data/
+    - search.js\*
+  - www/js/
+    - app.js (app model)
+    - main.js (setup & brokering)
+    - util.js (template loading)\*
 
-### testing concepts
+### example: search results
 
-- basic test
-  - input -> output
-  - views/likes.js
-- fixtures
-  - views/searchResults.js
-- mocks & spies
-  - views/searchForm.js
-  - model.js
-- mocking ajax
-  - data/search.js
-- async
-  - views/searchResults.js
+- are results displayed correctly?
+- is no results case handled correctly?
+- do likes get set correctly?
+- concepts:
+  - fixture data
+  - mocks
+  - spies
+- challenges:
+  - how to deal with likes, event delegation?
+
+### example: search data
+
+- do we hit the right URL?
+- do we return a promise?
+- does the server response get processed correctly?
+- concepts:
+  - ajax mocking
+  - don't test the server!
 
 ## automating
 
 - grunt
 - qunit config in grunt.js
-- grunt qunit
+- `grunt qunit`
+- `grunt test` for qunit and jshint
