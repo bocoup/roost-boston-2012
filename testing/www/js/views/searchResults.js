@@ -25,13 +25,7 @@ app.SearchResults = (function() {
     _handleLike : function( evt ) {
       evt.preventDefault();
       var name = $( evt.currentTarget ).attr('data-name');
-      this.handleLike( name );
-    },
-
-    handleLike : function( name ) {
-      var liked = this.app.get( 'liked' ) || [];
-      liked.push( name );
-      this.app.set( 'liked',  liked );
+      this.app.add( 'liked', name );
     }
 
   };

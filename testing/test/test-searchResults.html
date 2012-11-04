@@ -102,16 +102,6 @@
     });
   });
 
-  test('likes', function() {
-    var results = new app.SearchResults({
-      el : '#results',
-      app : appModel
-    });
-
-    results.handleLike( 'Jory' );
-
-    ok( appModel.set.calledWith( 'liked', [ 'Jory' ] ), 'Like registered with app model' );
-  });
   </script>
 </body>
 </html>
