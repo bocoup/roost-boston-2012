@@ -12,8 +12,8 @@ module.exports = function(grunt) {
       files: ['test/**/test-*.html']
     },
     watch: {
-      files: '<config:lint.files>',
-      tasks: 'lint qunit'
+      files: [ '<config:lint.files>', 'www/templates/*.tmpl' ],
+      tasks: 'test'
     },
     jshint: {
       options: {
