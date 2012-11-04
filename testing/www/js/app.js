@@ -15,6 +15,12 @@ app.Model = (function() {
       this.trigger( 'change:' + k, changeData );
     },
 
+    add : function( k, v ) {
+      var old = this.get( k ) || [];
+      old.push( v );
+      this.set( k, old );
+    },
+
     get : function( k ) {
       return this._attributes[ k ];
     }

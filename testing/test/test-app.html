@@ -13,7 +13,7 @@
   <script src="../www/lib/qunit/qunit.js"></script>
   <script src="../www/lib/sinon.js"></script>
 
-  <script src="../www/js/model.js"></script>
+  <script src="../www/js/app.js"></script>
 
 </head>
 <body>
@@ -34,6 +34,18 @@
     equal( m.get('key'), undefined );
     m.set( 'key', 'value' );
     equal( m.get('key'), 'value' );
+  });
+
+  test('adding', function() {
+    var m = new app.Model();
+    m.set( 'key', [ 'value' ]);
+    m.add( 'key', 'newValue' );
+
+    equal( m.get('key').length, 2, 'value is added');
+    equal( m.get('key')[1], 'newValue', 'value is pushed' );
+
+    m.add( 'key2', 'value2' );
+    equal( m.get('key2')[0], 'value2', 'array is created if empty' );
   });
 
   test('change events', function() {
