@@ -56,48 +56,55 @@ www/js/traditional.js
   - www/js/views/
     - likes.js\*
     - searchForm.js
-    - searchResults.js\*
+    - searchResults.js\* ()
   - www/js/data/
-    - search.js\*
+    - search.js\* (search data)
   - www/js/
     - app.js (app model)
     - main.js (setup & brokering)
-    - util.js (template loading)\*
+    - util.js (template loading)
 
 ### example: likes view
 
-- can we add a new like?
+- what to test:
+  - can we add a new like?
+  - does it get added where we want it?
+  - is the no results message removed?
+- concepts:
+  - setting up a qunit test harness
+  - `module()`, `test()`
+  - `ok()`, `equal()`
+- implementation:
+  - module definition
+    - `new app.Likes( config );`
 
 ### example: search results
 
-- are results displayed correctly?
-- is no results case handled correctly?
-- do likes get set correctly?
+- what to test:
+  - are results displayed correctly?
+  - is no results case handled correctly?
+  - do likes get set correctly?
 - concepts:
   - fixture data
+    - hard-coded
+    - generated
   - mocks
   - spies
 - challenges:
   - how to deal with likes, event delegation?
+- implementation:
 
 ### example: search data
 
-- do we hit the right URL?
-- do we return a promise?
-- does the server response get processed correctly?
+- what to test:
+  - do we hit the right URL?
+  - do we return a promise?
+  - does the server response get processed correctly?
 - concepts:
+  - setup, teardown
   - ajax mocking
   - don't test the server!
-
-### example: template loading
-
-- we still don't want to hit the server, so ...
-  - generate template fixture
-- do we hit the right URL?
-- do we return a promise?
-- does the response get processed correctly?
-- concepts:
-  - generated fixture
+- implementation
 
 ## automating
 
