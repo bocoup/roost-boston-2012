@@ -5,10 +5,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: '<json:package.json>',
     lint: {
-      files: ['grunt.js', 'www/**/*.js', 'test/**/*.js']
-    },
-    qunit: {
-      files: ['test/**/*.html']
+      files: ['grunt.js', 'www/js/*.js']
     },
     watch: {
       files: '<config:lint.files>',
@@ -28,7 +25,10 @@ module.exports = function(grunt) {
         eqnull: true,
         browser: true
       },
-      globals: {}
+      globals: {
+        require: true,
+        define: true
+      }
     },
     uglify: {},
     requirejs: {
