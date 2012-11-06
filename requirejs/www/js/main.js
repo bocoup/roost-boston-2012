@@ -1,3 +1,6 @@
-define([ 'jquery', 'backbone', 'underscore'], function($, B, _) {
-
+define([ 'backbone', 'app/router' ], function(B, Router) {
+  $(function() {
+    new Router();
+    B.history.start();
+  });
 });

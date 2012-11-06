@@ -4,11 +4,14 @@ CatFinder.Models = {};
 
 CatFinder.Models.App = Backbone.Model.extend({
   initialize: function() {
-    this.on('change:searchTerm', function(term) {
+    this.on('change:searchTerm', function(model) {
+      var term = model.get('searchTerm');
 
       var matches = CatFinder.cats.filter(function(cat) {
         return cat.get('name').match(term);
       });
+
+      console.log('matches', matches);
 
       this.set('results', matches);
 

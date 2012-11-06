@@ -9,7 +9,8 @@ require.config({
   paths: {
     "jquery": "../lib/jquery",
     "backbone": "../lib/backbone",
-    "underscore": "../lib/underscore"
+    "underscore": "../lib/underscore",
+    "app": "cat-finder-modules"
   },
 
   // shim to work with non-AMD files

@@ -14,6 +14,8 @@
 
 ## traditional application
 
+www/index-traditional.html
+
 - organized, but ...
 - global namespace
 - lots of script tags
