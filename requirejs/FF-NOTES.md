@@ -68,6 +68,8 @@ define(function( require ) {
 - underscore, backbone via `shim`
 - template plugin
 
+## exercise: rewrite the views
+
 ## builds
 
 - grunt

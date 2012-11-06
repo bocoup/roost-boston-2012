@@ -62,27 +62,16 @@ www/js/traditional.js
     - main.js (setup & brokering)
     - util.js (template loading)
 
-### example: likes view
-
-- what to test:
-  - can we add a new like?
-  - does it get added where we want it?
-  - is the no results message removed?
-- concepts:
-  - setting up a qunit test harness
-  - `module()`, `test()`
-  - `ok()`, `equal()`
-- implementation:
-  - module definition
-    - `new app.Likes( config );`
-
 ### example: search results
 
 - what to test:
   - are results displayed correctly?
   - is no results case handled correctly?
-  - do likes get set correctly?
+  - do likes get announced correctly?
 - concepts:
+  - qunit test harness
+  - `module()`, `test()`
+  - `ok()`, `equal()`
   - fixture data
     - hard-coded
     - generated
@@ -91,6 +80,15 @@ www/js/traditional.js
 - challenges:
   - how to deal with likes, event delegation?
 - implementation:
+  - module definition
+    - `new app.SearchResults( config );`
+
+### exercise: likes view
+
+- what to test:
+  - can we add a new like?
+  - does it get added where we want it?
+  - is the no results message removed?
 
 ### example: search data
 
