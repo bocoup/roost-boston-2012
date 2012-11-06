@@ -1,9 +1,7 @@
 # writing testable javascript
 
-- installing the node dependencies: `npm install`
-- starting the server: `node server`
-- running the integration tests: `ruby spec/*.rb`
-  - you'll need ruby, rubygems, and bundler
+- install the node dependencies: `npm install`
+- start the server: `node server`
 
 ## traditional code
 
@@ -18,11 +16,11 @@ www/js/traditional.js
   - integration tests are slow
   - they don't help with design
   - really just smoke tests
-  - [demo integration tests]
+  - [demo integration tests] `ruby spec/app.rb`
 
 ## what is a unit test?
 
-- a test simply determines whether something is true
+- a test that determines whether something is true
 - www/lib/myUnit.js -- a stupid simple test framework
   - anything fancier is just sugar!
 - a test for fizzbuzz
@@ -43,20 +41,20 @@ www/js/traditional.js
   - no anonymous functions
   - loosely coupled: single responsibility
 
-## rewriting
-
-- we are somewhat artificially not using a framework like backbone etc.
-
 - test first
   - aids in design
   - promotes loose coupling
   - you'll be surprised how well it works
 
+## rewriting
+
+- [we are somewhat artificially not using a framework like backbone etc.]
+
 - we'll break our code into a few pieces
   - www/js/views/
     - likes.js\*
     - searchForm.js
-    - searchResults.js\* ()
+    - searchResults.js\*
   - www/js/data/
     - search.js\* (search data)
   - www/js/
