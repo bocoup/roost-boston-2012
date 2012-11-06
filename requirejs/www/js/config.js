@@ -10,7 +10,8 @@ require.config({
     "jquery": "../lib/jquery",
     "backbone": "../lib/backbone",
     "underscore": "../lib/underscore",
-    "app": "cat-finder-modules"
+    "app": "cat-finder-modules",
+    "templates": "../templates"
   },
 
   // shim to work with non-AMD files

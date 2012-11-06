@@ -1,4 +1,8 @@
-define([ 'backbone', 'underscore' ], function(B, _) {
+define([
+  'backbone',
+  'underscore',
+  'text!templates/cat.html'
+], function(B, _, catTemplate) {
   return B.View.extend({
     el: "#results",
 
@@ -7,7 +11,7 @@ define([ 'backbone', 'underscore' ], function(B, _) {
     },
 
     _onChange: function(model) {
-      var tmpl = _.template("<li><%= name %> (<%= type %>)</li>");
+      var tmpl = _.template(catTemplate);
       var html = _.map(model.get("results"), function(result) {
         return tmpl(result.toJSON());
       }).join("");
