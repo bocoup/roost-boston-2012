@@ -1,15 +1,17 @@
 require.config({
   deps: [ 'main' ],
   paths: {
-    vendor: '../lib'
+    underscore: '../lib/underscore',
+    backbone: '../lib/backbone',
+    jquery: '../lib/jquery'
   },
   shim: {
-    'vendor/underscore': {
+    'underscore': {
       exports: '_'
     },
-    'vendor/backbone': {
+    'backbone': {
       exports: 'Backbone',
-      deps: [ 'vendor/jquery', 'vendor/underscore' ]
+      deps: [ 'jquery', 'underscore' ]
     }
   }
 });
