@@ -66,7 +66,8 @@ if ( mode === 'bdd-expect' ) {
 mocha.setup( mode.split('-')[0] );
 
 var paths = {
-  app: appDir
+  app: appDir,
+  test: '../test'
 };
 
 var appLibsArray = [];

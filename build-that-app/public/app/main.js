@@ -1,3 +1,3 @@
-require([ 'vendor/jquery' ], function( $ ) {
+require([ 'jquery' ], function( $ ) {
 
 });
