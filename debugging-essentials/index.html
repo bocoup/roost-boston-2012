@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Debugging Essentials</title>
+  <link href="assets/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container-fluid">
+    <h1>Debugging Essentials</h1>
+    <div id="target">
+      <div class="well">
+        <h2>Exception handling</h2>
+        <p>
+          When we encounter unexpected errors, we can tell the debugger to pause
+          on exceptions (especially uncaught exceptions) and it will jump to the
+          line of code where the exception was thrown the next time it happens.
+          This allows us to inspect variables that might otherwise be inaccessible.
+        </p>
+        <button class="btn throw-an-exception">Throw an exception</button>
+      </div>
+      <div class="well">
+        <h2>The debugger statement</h2>
+        <p>
+          The <code>debugger</code> statement will make code execution pause
+          when the debugger reaches it; at that point, you can inspect anything
+          of interest to you, and then allow the code to resume if you'd like.
+        </p>
+        <button class="btn throw-an-exception">Throw an exception</button>
+      </div>
+      <div class="well">
+        <h2>Setting breakpoints</h2>
+        <p>
+          Sometimes it's not practical (or possible) to modify your JavaScript files
+          to add a <code>debugger</code> statement; sometimes you're trying to debug a page
+          that can't be reloaded because state will be lost. In those cases,
+          you can set a breakpoint manually. Once set, breakpoints will stop code
+          execution as if the <code>debugger</code> statement was used, but can
+          be bypassed or disabled without reloading the page.
+        </p>
+        <button class="btn set-breakpoint">Click after setting a breakpoint</button>
+      </div>
+      <div class="well">
+        <h2>Debugging library errors</h2>
+        <p>
+          Debugging skills are especially useful when you run into errors that
+          appear to be coming from a library like jQuery; usually the error isn't
+          in the library, but in your code. In these cases, you should utilize
+          both the function "Call Stack" and the "Pretty Print" tool to find out
+          where the error originated. Also, it's much easier to debug <em>unminified</em>
+          code.
+        </p>
+        <button class="btn mysterious-jquery-error">Click for a mysterious jQuery error</button>
+      </div>
+      <h2>Additional resources</h2>
+      <ul>
+        <li><a href="https://developers.google.com/chrome-developer-tools/docs/overview">Chrome Developer Tools Docs</a></li>
+        <li><a href="http://www.youtube.com/watch?v=nOEw9iiopwI">Google Chrome Developer Tools: 12 Tricks to Develop Quicker</a> (video)</li>
+      </ul>
+    </div>
+  </div>
+  <script src="assets/lib/jquery/jquery.min.js"></script>
+  <script src="debugging.js"></script>
+</body>
