@@ -209,12 +209,12 @@ $( document ).ready(function() {
 var developerBen = {
   firstName: 'Ben',
   lastName: 'Alman',
-  introduce: function() {
-    console.log( this.firstName, this.lastName );
+  introduce: function( greet ) {
+    console.log( greet, this.firstName, this.lastName );
   }
 };
 
-developerBen.introduce(); // Ben Alman
+developerBen.introduce( 'Hello,' ); // Ben Alman
 
 
 
@@ -230,7 +230,8 @@ var developerDan = {
 // we could be clever and use developerBen's introduce method to introduce
 // developerDan, as well:
 
-developerBen.introduce.call( developerDan ); // Dan Heberden
+developerBen.introduce.call( developerDan, 'Yo!' ); // Dan Heberden
+developerBen.introduce.apply( developerDan, [ 'Yo!' ] ); // Dan Heberden
 
 
 
