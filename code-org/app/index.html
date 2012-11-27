@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+  <script src="lib/require.js" data-main="config"></script>
+  <script>
+  require([ 'js/app' ], function( app ) {
+    $(function() {
+      app.ben.introduce();
+      app.dan.introduce();
+    });
+  });
+  </script>
+</body>

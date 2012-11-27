@@ -284,3 +284,40 @@ developerDan.introduce(); // Dan Heberden
 
 // this works because methods (and properties) that are assigned to an
 // object's prototype are shared by all instances of the object.
+
+
+
+
+
+
+// these are all techniques for structuring code, but how do you actually
+// organize it in the filesystem? we want:
+//
+// - modular files for development & testing
+// - built files for production
+// - a way to express dependencies
+//
+// enter requirejs ... it wraps the module pattern in define()
+
+define(function() {
+  var Person = function( firstName, lastName ) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  };
+
+  Person.prototype.introduce = function() {
+    console.log( 'My name is ' + this.firstName + ' ' + this.lastName );
+  };
+
+  return Person;
+});
+
+// if we save this in a file js/person.js, we can use it as a dependency for
+// another module definition
+
+define([ 'js/person' ], function( P ) {
+  return {
+    ben: new P( 'Ben', 'Alman' ),
+    dan: new P( 'Dan', 'Heberden' )
+  };
+});
