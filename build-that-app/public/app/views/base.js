@@ -53,7 +53,13 @@ define([
     // a model or collection, it will just return the view object itself.
     serialize : function() {
       if (this.model || this.collection) {
-        return (this.model || this.collection).toJSON();
+        if (this.model) {
+          return this.model.toJSON();
+        }
+
+        if (this.collection) {
+          return { data : this.collection.toJSON() };
+        }
       }
 
       return this;
