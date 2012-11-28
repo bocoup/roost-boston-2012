@@ -1,7 +1,4 @@
 define([ 'jquery' ], function( $ ) {
-
-  console.log(jQuery);
-
   var Person = function( firstName, lastName ) {
     this.firstName = firstName;
     this.lastName = lastName;

@@ -7,8 +7,9 @@
   <script>
   require([ 'js/app' ], function( app ) {
     $(function() {
-      app.ben.introduce();
-      app.dan.introduce();
+      [ 'ben', 'dan' ].forEach(function( p ) {
+        app[ p ].introduce();
+      });
     });
   });
   </script>
