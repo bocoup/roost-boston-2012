@@ -4,7 +4,7 @@
 var mode = 'tdd';
 
 // location of your app files relative to this file
-var appDir = '../public/app';
+var appDir = '../app';
 
 // any vendor libraries or plugins you are using, and their
 // location relative to this configuration file.
@@ -17,9 +17,9 @@ var appDir = '../public/app';
 //      jquery: '../demo-app/vendor/jquery'
 //    };
 var appLibs = {
-  backbone: '../public/lib/backbone',
-  underscore: '../public/lib/underscore',
-  jquery: '../public/lib/jquery'
+  backbone: '../lib/backbone',
+  underscore: '../lib/underscore',
+  jquery: '../lib/jquery'
 };
 
 // if your vendor libraries have dependencies on other libraries,
@@ -67,7 +67,8 @@ mocha.setup( mode.split('-')[0] );
 
 var paths = {
   app: appDir,
-  test: '../test'
+  test: '../test',
+  text: '../lib/text'
 };
 
 var appLibsArray = [];
