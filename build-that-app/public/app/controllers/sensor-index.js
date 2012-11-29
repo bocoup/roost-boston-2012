@@ -9,9 +9,11 @@ define([
 
   var SensorIndex = function() {
     sensorList = new SensorsList({
-      el: '#sensors-list',
       collection: sensors
     });
+
+    sensorList.render();
+    sensorList.placeAt('#sensors-list');
 
     sensors.fetch();
   };

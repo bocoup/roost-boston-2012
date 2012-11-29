@@ -43,6 +43,8 @@ define([
       sl.render();
 
       assert.equal( $('#test li').length, 3 );
+      assert.equal( $('#test li .sparklines').attr('values'), '1,2,3' );
+
       sl.destroy();
     });
 
@@ -80,5 +82,6 @@ define([
       sensorCollection.trigger('reset');
       assert( flag );
     });
+
   });
 });

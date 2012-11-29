@@ -1,6 +1,7 @@
 define([
   './base',
-  'text!./templates/sensor-list.html'
+  'text!./templates/sensor-list.html',
+  'lib/jquery.sparkline.js'
 ], function( SuperView, tmpl ) {
   var SensorsList = SuperView.extend({
     template: tmpl,
@@ -8,6 +9,10 @@ define([
     initialize: function() {
       this.bindTo( this.collection, 'add', this.render );
       this.bindTo( this.collection, 'reset', this.render );
+    },
+
+    postRender: function() {
+      this.$el.find('.sparklines').sparkline();
     }
   });
 

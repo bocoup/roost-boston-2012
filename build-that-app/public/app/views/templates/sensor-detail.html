@@ -1,4 +1,11 @@
-<h1><%= name %></h1>
-<p>Min: <span class="min"><%= _.min( data ) %></span></p>
-<p>Max: <span class="max"><%= _.max( data ) %></span></p>
-<p>Data points: <span class="points"><%= data.length %></span></p>
+<div>
+  <h1><%= name %></h1>
+
+  <p><span class="sparklines" values="<%=
+    data.slice(-200).join(',')
+  %>" style="font-size: 250%"></span></p>
+
+  <p>Min: <span class="min"><%= _.min( data ) %></span></p>
+  <p>Max: <span class="max"><%= _.max( data ) %></span></p>
+  <p>Data points: <span class="points"><%= data.length %></span></p>
+</div>

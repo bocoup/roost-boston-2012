@@ -16,7 +16,7 @@ Sensor.prototype.generateData = function() {
   this._cleanup();
   setTimeout(function() {
     this.generateData();
-  }.bind(this), 3000 );
+  }.bind(this), 100 );
 };
 
 Sensor.prototype._cleanup = function() {
