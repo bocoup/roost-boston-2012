@@ -1,7 +1,8 @@
 require([
   'router',
-  'backbone'
-], function( Router, B ) {
+  'backbone',
+  'jquery'
+], function( Router, B, $ ) {
   $(function() {
 
     var router = new Router();
@@ -14,7 +15,7 @@ require([
 
       if (href.prop.slice(0, root.length) === root) {
         evt.preventDefault();
-        Backbone.history.navigate(href.attr, true);
+        B.history.navigate(href.attr, true);
       }
     });
 

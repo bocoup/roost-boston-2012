@@ -2,6 +2,8 @@ define([
   'backbone',
   'controllers/sensor-index'
 ], function( B, SensorIndex ) {
+  var controller;
+
   var Router = B.Router.extend({
     routes: {
       '': 'index',

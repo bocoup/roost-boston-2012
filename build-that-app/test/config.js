@@ -1,3 +1,5 @@
+/*global mocha:true, chai:true */
+
 (function() {
 
 // test mode -- 'tdd', 'bdd-should', or 'bdd-expect'

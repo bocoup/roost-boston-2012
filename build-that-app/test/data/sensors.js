@@ -1,3 +1,5 @@
+/*global assert:true, suite:true, setup:true, teardown:true, test:true, sinon:true */
+
 define([ 'data/sensors' ], function( SensorsCollection ) {
   suite('SensorsCollection', function() {
     var xhr, requests, data;

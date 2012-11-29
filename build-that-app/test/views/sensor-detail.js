@@ -1,3 +1,5 @@
+/*global assert:true, suite:true, setup:true, teardown:true, test:true */
+
 define([
   'views/sensor-detail',
   'backbone',
