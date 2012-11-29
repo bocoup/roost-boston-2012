@@ -8,10 +8,6 @@ define([
   var sensors = new SensorCollection();
 
   var SensorIndex = function() {
-    app.on( 'change:currentSensor', function( app, sensorId ) {
-      this.showDetail( sensorId );
-    }, this);
-
     sensorList = new SensorsList({
       el: '#sensors-list',
       collection: sensors
