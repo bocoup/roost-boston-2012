@@ -1,7 +1,7 @@
 define([
   'data/sensors',
   'views/sensors-list',
-  'views/sensor-detail'
+  'views/sensor-detail',
   'backbone'
 ], function( SensorCollection, SensorsList, SensorDetail, B ) {
   var app = new B.Model();
@@ -27,12 +27,16 @@ define([
       sensorDetail.destroy();
     }
 
-    sensorDetail = new SensorDetail({
-      el: '#sensor-detail',
-      model: sensors.get( sensorId );
+    sensors.fetch({
+      success: function() {
+        sensorDetail = new SensorDetail({
+          model: sensors.get( sensorId )
+        }).render();
+
+        sensorDetail.placeAt('#sensor-detail');
+      }
     });
 
-    sensorDetail.render();
   };
 
   return SensorIndex;

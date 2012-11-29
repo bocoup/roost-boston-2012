@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Srchr</title>
+    <title>Sensors!</title>
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bocoup.css">
 </head>
@@ -10,29 +10,18 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="/">Srchr</a>
+        <a class="brand" href="/">Sensors!</a>
       </div>
     </div>
   </div>
   <div class="container">
 
-    <form id="searchForm" class="well form-search">
-      <input type="text" name="q" class="input-medium search-query" placeholder="Enter your search">
-      <input type="submit" class="btn" value="Search">
-    </form>
     <div class="row">
-      <div class="span7">
-        <ul id="results">
-          <li class="no-results">There are no results yet.</li>
-        </ul>
+      <div class="span4">
+        <div id="sensors-list"></div>
       </div>
-      <div class="span4 offset1">
-        <div class="well">
-          <h3>Liked</h3>
-          <ul id="liked">
-            <li class="no-results">You haven't liked anything yet.</li>
-          </ul>
-        </div>
+      <div class="span7 offset1">
+        <div id="sensor-detail"></div>
       </div>
     </div>
   </div>

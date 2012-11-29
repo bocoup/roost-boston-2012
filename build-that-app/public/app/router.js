@@ -5,7 +5,7 @@ define([
   var Router = B.Router.extend({
     routes: {
       '': 'index',
-      '/sensors/:sensorId': 'sensor'
+      'sensors/:sensorId': 'sensor'
     },
 
     index: function() {
@@ -16,6 +16,8 @@ define([
       if ( !controller ) {
         controller = new SensorIndex();
       }
+
+      controller.showDetail( sensorId );
     }
   });
 

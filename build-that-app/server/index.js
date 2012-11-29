@@ -7,11 +7,16 @@ var sensors   = [];
 var Sensor = function( id ) {
   this.id = id;
   this.data = [];
+  this.name = 'Fake Sensor ' + id;
 };
 
 Sensor.prototype.generateData = function() {
+  console.log( 'generating data for ', this.id );
   this.data.push( Math.random() );
   this._cleanup();
+  setTimeout(function() {
+    this.generateData();
+  }.bind(this), 3000 );
 };
 
 Sensor.prototype._cleanup = function() {
@@ -23,16 +28,15 @@ Sensor.prototype._cleanup = function() {
 for ( var i = 0; i < 5; i++ ) {
   var s = new Sensor( 'sensor-' + i );
   sensors.push( s );
-
-  (function(s){
-    setTimeout(function() {
-      s.generateData();
-    }, 1000);
-  }(s));
+  s.generateData();
 }
 
 app.use( '/', express.static( baseDir + 'public' ) );
 app.use( '/test', express.static( baseDir + 'test') );
+
+app.get( '/sensors/:sensorId', function( req, res ) {
+  res.redirect( '/' );
+});
 
 app.get( '/data/sensors', function( req, res ) {
   res.json({ sensors: sensors });
