@@ -4,7 +4,6 @@ define([
   'views/sensor-detail',
   'backbone'
 ], function( SensorCollection, SensorsList, SensorDetail, B ) {
-  var app = new B.Model();
   var sensorList, sensorDetail;
   var sensors = new SensorCollection();
 
@@ -15,7 +14,6 @@ define([
 
     sensorList = new SensorsList({
       el: '#sensors-list',
-      app: app,
       collection: sensors
     });
 

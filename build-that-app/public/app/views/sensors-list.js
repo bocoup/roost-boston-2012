@@ -8,7 +8,6 @@ define([
     initialize: function() {
       this.bindTo( this.collection, 'add', this.render );
       this.bindTo( this.collection, 'reset', this.render );
-      this.app = this.options.app || {};
     }
   });
 

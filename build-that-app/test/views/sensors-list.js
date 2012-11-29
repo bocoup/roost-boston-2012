@@ -80,20 +80,5 @@ define([
       sensorCollection.trigger('reset');
       assert( flag );
     });
-
-    test('Click on sensor changes app model', function() {
-      var app = new B.Model();
-      var sl = new SensorsList({
-        collection: sensorCollection,
-        el: '#test',
-        app: app
-      });
-
-      sl.render();
-
-      $('#test li a').first().simulate('click');
-
-      assert.equal( app.get('currentSensor'), 'sensor-1' );
-    });
   });
 });
