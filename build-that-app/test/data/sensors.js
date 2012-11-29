@@ -1,4 +1,4 @@
-define([ 'app/data/sensors' ], function( SensorsCollection ) {
+define([ 'data/sensors' ], function( SensorsCollection ) {
   suite('SensorsCollection', function() {
     var xhr, requests, data;
 

@@ -42,7 +42,7 @@ io.sockets.on( 'connection', function(s) {
 });
 
 app.use( '/', express.static( baseDir + 'public' ) );
-app.use( '/test', express.static( baseDir + 'test') );
+app.use( '/_test', express.static( baseDir + 'test') );
 
 app.get( '/sensors/:sensorId', function( req, res ) {
   res.redirect( '/' );

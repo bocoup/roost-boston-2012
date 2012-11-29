@@ -1,5 +1,5 @@
 define([
-  'app/views/sensors-list',
+  'views/sensors-list',
   'backbone',
   'jquery',
   'lib/jquery.simulate.js'

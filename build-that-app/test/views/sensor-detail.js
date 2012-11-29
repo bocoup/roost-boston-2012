@@ -1,5 +1,5 @@
 define([
-  'app/views/sensor-detail',
+  'views/sensor-detail',
   'backbone',
   'jquery'
 ], function( SensorDetail, B, $ ) {
