@@ -1,8 +1,11 @@
+var _         = require( 'underscore' );
 var express   = require( 'express' );
-var _         = require( 'underscore' )
 var app       = express( express.bodyParser() );
+var server    = require( 'http').createServer( app );
 var baseDir   = __dirname + '/../';
 var sensors   = [];
+var io        = require( 'socket.io' ).listen( server );
+
 
 var Sensor = function( id ) {
   this.id = id;
@@ -11,12 +14,11 @@ var Sensor = function( id ) {
 };
 
 Sensor.prototype.generateData = function() {
-  console.log( 'generating data for ', this.id );
   this.data.push( Math.random() );
   this._cleanup();
   setTimeout(function() {
     this.generateData();
-  }.bind(this), 100 );
+  }.bind(this), 500 );
 };
 
 Sensor.prototype._cleanup = function() {
@@ -30,6 +32,14 @@ for ( var i = 0; i < 5; i++ ) {
   sensors.push( s );
   s.generateData();
 }
+
+io.sockets.on( 'connection', function(s) {
+  function sendData() {
+    s.emit( 'data', { sensors: sensors });
+    setTimeout( sendData, 500 );
+  }
+  sendData();
+});
 
 app.use( '/', express.static( baseDir + 'public' ) );
 app.use( '/test', express.static( baseDir + 'test') );
@@ -50,6 +60,6 @@ app.get( '/data/sensors/:sensorId', function( req, res ) {
   res.json( s );
 });
 
-app.listen( 4000 );
+server.listen( 4000 );
 
 console.log( 'Serving on http://localhost:4000' );
