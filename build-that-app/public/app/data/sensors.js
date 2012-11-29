@@ -3,21 +3,19 @@ define([ 'backbone', 'underscore', './socket' ], function( B, _, socket ) {
     url: '/data/sensors',
 
     initialize: function() {
-      var self = this;
+      socket.on( 'data', _.bind( this.update, this ) );
+    },
 
-      socket.on( 'data', function( data ) {
-        _.each( data.sensors, function(s) {
-          var model = self.get( s.id );
+    update: function( data ) {
+      _.each( data.sensors, function(s) {
+        var model = this.get( s.id );
 
-          if ( model ) {
-            model.set( 'data', s.data );
-          } else {
-            self.add( s, { silent: true } );
-          }
-        }, self);
-
-        self.trigger( 'change' );
-      });
+        if ( model ) {
+          model.set( 'data', s.data );
+        } else {
+          this.add( s );
+        }
+      }, this);
     },
 
     parse: function( resp ) {

@@ -1,4 +1,6 @@
 define(function() {
-  var s = window.io.connect('http://localhost:4000');
-  return s;
+  var s = window.io && window.io.connect('http://localhost:4000');
+  return s || {
+    on: function() {}
+  };
 });

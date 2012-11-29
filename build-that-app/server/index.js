@@ -22,7 +22,7 @@ Sensor.prototype.generateData = function() {
 };
 
 Sensor.prototype._cleanup = function() {
-  if ( this.data.length > 1000 ) {
+  if ( this.data.length > 100 ) {
     this.data.shift();
   }
 };
