@@ -19,6 +19,7 @@ define([
 
     update: function() {
       var data = this.model.get('data');
+
       this.minElement.text( _.min( data ) );
       this.maxElement.text( _.max( data ) );
       this.pointsElement.text( data.length );
