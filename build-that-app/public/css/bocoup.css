@@ -1,16 +1,7 @@
 body {
-  padding-top: 50px;
+  padding-top: 100px;
 }
 
-#liked, #results {
-  list-style: none;
-  margin: 0 0 10px 0;
-}
-#results li + li {
-  padding: 10px 0;
-  border-top: 1px solid #eee;
-}
-#results .btn {
-  float: right;
-  margin-left: 10px;
+#sensor-detail p.sparkline {
+  margin: 20px 0;
 }

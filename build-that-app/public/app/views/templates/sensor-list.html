@@ -5,7 +5,7 @@
       <span class="sparklines" values="<%=
         sensor.data.slice(-10).join(',')
       %>"></span>
-      <%= sensor.name %>
+      <%= sensor.name %> (<%= sensor.type %>)
     </a>
   </li>
   <% }); %>

@@ -6,15 +6,24 @@ var baseDir   = __dirname + '/../';
 var sensors   = [];
 var io        = require( 'socket.io' ).listen( server );
 
+var sensorTypes = [
+  'motion',
+  'accelerometer',
+  'temperature',
+  'photocell',
+  'potentiometer'
+];
 
 var Sensor = function( id ) {
   this.id = id;
   this.data = [];
   this.name = id;
+  this.type = sensorTypes[ _.random( sensorTypes.length - 1 ) ];
 };
 
 Sensor.prototype.generateData = function() {
-  this.data.push( Math.random() );
+  this.data.push( _.random( 0, 255 ) );
+
   this._cleanup();
   setTimeout(function() {
     this.generateData();
