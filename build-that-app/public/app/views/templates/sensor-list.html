@@ -1,5 +1,12 @@
-<% _.each( data, function( sensor ) { %>
-<li data-id="<%= sensor.id %>"><a href="/sensors/<%= sensor.id %>"><%= sensor.name %></a> <span class="sparklines" values="<%=
-    sensor.data.slice(-10).join(',')
-  %>"></span></li>
-<% }); %>
+<ul class="nav nav-tabs nav-stacked">
+  <% _.each( data, function( sensor ) { %>
+  <li data-id="<%= sensor.id %>">
+    <a href="/sensors/<%= sensor.id %>">
+      <span class="sparklines" values="<%=
+        sensor.data.slice(-10).join(',')
+      %>"></span>
+      <%= sensor.name %>
+    </a>
+  </li>
+  <% }); %>
+</ul>

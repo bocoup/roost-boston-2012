@@ -10,7 +10,7 @@ var io        = require( 'socket.io' ).listen( server );
 var Sensor = function( id ) {
   this.id = id;
   this.data = [];
-  this.name = 'Fake Sensor ' + id;
+  this.name = id;
 };
 
 Sensor.prototype.generateData = function() {
