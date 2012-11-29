@@ -42,6 +42,7 @@ define([
       assert.equal( $('#test .js-min').html(), '1' );
       assert.equal( $('#test .js-max').html(), '3' );
       assert.equal( $('#test .js-points').html(), '4' );
+      assert.equal( $('#test .js-sparkline').attr('values'), '1,2,3,3' );
 
       sd.destroy();
     });
@@ -54,8 +55,11 @@ define([
 
       sd.render();
 
-      sensorModel.set('data', [ 1, 2, 3, 4 ]);
+      sensorModel.set('data', [ 0, 1, 2, 3, 4 ]);
       assert.equal( $('#test .js-max').html(), '4' );
+      assert.equal( $('#test .js-min').html(), '0' );
+      assert.equal( $('#test .js-points').html(), '5' );
+      assert.equal( $('#test .js-sparkline').attr('values'), '0,1,2,3,4' );
 
       sd.destroy();
     });
