@@ -3,8 +3,7 @@
 define([
   'views/sensors-list',
   'backbone',
-  'jquery',
-  'lib/jquery.simulate.js'
+  'jquery'
 ], function( SensorsList, B, $ ) {
   suite('SensorsList', function() {
     var sensorCollection;
