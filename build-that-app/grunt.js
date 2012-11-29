@@ -29,7 +29,7 @@ module.exports = function(grunt) {
       }
     },
     mocha: {
-      all: [ 'test/index.html' ]
+      all: [ 'http://localhost:4000/_test' ]
     }
   });
 
