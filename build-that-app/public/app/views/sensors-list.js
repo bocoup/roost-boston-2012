@@ -7,8 +7,7 @@ define([
     template: tmpl,
 
     initialize: function() {
-      this.bindTo( this.collection, 'add', this.render );
-      this.bindTo( this.collection, 'reset', this.render );
+      this.bindTo( this.collection, 'add change reset', this.render );
     },
 
     postRender: function() {
