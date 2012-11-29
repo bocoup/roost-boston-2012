@@ -5,6 +5,7 @@ var server    = require( 'http').createServer( app );
 var baseDir   = __dirname + '/../';
 var sensors   = [];
 var io        = require( 'socket.io' ).listen( server );
+var fs        = require( 'fs' );
 
 var sensorTypes = [
   'motion',
@@ -54,7 +55,9 @@ app.use( '/', express.static( baseDir + 'public' ) );
 app.use( '/_test', express.static( baseDir + 'test') );
 
 app.get( '/sensors/:sensorId', function( req, res ) {
-  res.redirect( '/' );
+  fs.readFile( baseDir + 'public/index.html', 'utf8', function( err, txt ) {
+    res.send( txt );
+  });
 });
 
 app.get( '/data/sensors', function( req, res ) {
