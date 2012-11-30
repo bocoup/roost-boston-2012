@@ -3,14 +3,18 @@ require.config({
     window.location.pathname === '/_test' ? 'test/config' : 'main'
   ],
   paths: {
-    underscore: '../lib/underscore',
-    backbone: '../lib/backbone',
-    jquery: '../lib/jquery',
-    text: '../lib/text',
-    test: '../_test',
-    socketio: '../lib/socket'
+    lib: '/lib',
+    underscore: '/lib/underscore',
+    backbone: '/lib/backbone',
+    jquery: '/lib/jquery',
+    text: '/lib/text',
+    test: '/_test',
+    socketio: '/socket.io/socket.io'
   },
   shim: {
+    'socketio': {
+      exports: 'io'
+    },
     'underscore': {
       exports: '_'
     },
