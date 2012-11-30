@@ -8,7 +8,7 @@
 
     <p class="sparkline"><span class="js-sparkline" values="<%=
       data.slice(-200).join(',')
-    %>" style="font-size: 250%"></span></p>
+    %>" style="font-size: 250%" sparkChartRangeMin="0" sparkChartRangeMax="100"></span></p>
 
     <p>Min: <span class="js-min"><%= _.min( data ) %></span></p>
     <p>Max: <span class="js-max"><%= _.max( data ) %></span></p>

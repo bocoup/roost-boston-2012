@@ -4,7 +4,7 @@
     <a href="/sensors/<%= sensor.id %>">
       <span class="sparklines" values="<%=
         sensor.data.slice(-10).join(',')
-      %>"></span>
+      %>" sparkChartRangeMin="0" sparkChartRangeMax="100"></span>
       <%= sensor.name %> (<%= sensor.type %>)
     </a>
   </li>

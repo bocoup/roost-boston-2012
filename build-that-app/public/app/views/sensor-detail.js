@@ -33,7 +33,7 @@ define([
     },
 
     sparklines: function() {
-      this.sparklineElement.sparkline();
+      this.sparklineElement.sparkline('html', { enableTagOptions: true });
     }
   });
 

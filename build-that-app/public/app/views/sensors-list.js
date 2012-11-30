@@ -11,7 +11,7 @@ define([
     },
 
     postRender: function() {
-      this.$el.find('.sparklines').sparkline();
+      this.$el.find('.sparklines').sparkline('html', { enableTagOptions: true });
     }
   });
 
