@@ -7,7 +7,7 @@ define([ 'backbone', 'underscore', './socket' ], function( B, _, socket ) {
     },
 
     update: function( data ) {
-      _.each( data.sensors, function(s) {
+      _.each( this.parse( data ), function(s) {
         var model = this.get( s.id );
 
         if ( model ) {

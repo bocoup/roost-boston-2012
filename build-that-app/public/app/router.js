@@ -1,8 +1,11 @@
 define([
   'backbone',
-  'controllers/sensor-index'
-], function( B, SensorIndex ) {
-  var controller;
+  'data/sensors',
+  'views/sensors-list',
+  'views/sensor-detail'
+], function( B, SensorCollection, SensorsList, SensorDetail ) {
+  var sensorList, sensorDetail;
+  var sensors = new SensorCollection();
 
   var Router = B.Router.extend({
     routes: {
@@ -11,15 +14,24 @@ define([
     },
 
     index: function() {
-      controller = new SensorIndex();
+      sensorList = new SensorsList({
+        collection: sensors
+      });
+
+      sensorList.render();
+      sensorList.placeAt('#sensors-list');
     },
 
     sensor: function( sensorId ) {
-      if ( !controller ) {
-        controller = new SensorIndex();
+      if ( sensorDetail ) {
+        sensorDetail.destroy();
       }
 
-      controller.showDetail( sensorId );
+      sensorDetail = new SensorDetail({
+        model: sensors.get( sensorId )
+      }).render();
+
+      sensorDetail.placeAt('#sensor-detail');
     }
   });
 
