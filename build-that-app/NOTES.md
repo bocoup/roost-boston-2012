@@ -8,13 +8,16 @@
 
 branch: configure-requirejs
 
+branch includes: server, public dir, populated public/lib dir
+
 - for now, just understand that server is serving public dir at /
 - getting requirejs essentially working
   - script tag loading requirejs
   - data-main attribute points to /app/config
+- create simple /app/config.js
 - require.config
   - paths: jquery, text plugin, tests
-- create simple /app/config.js
+  - deps
 - shimming underscore, backbone
   - paths
   - shim
