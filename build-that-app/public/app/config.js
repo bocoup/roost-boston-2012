@@ -7,7 +7,8 @@ require.config({
     backbone: '../lib/backbone',
     jquery: '../lib/jquery',
     text: '../lib/text',
-    test: '../_test'
+    test: '../_test',
+    socketio: '../lib/socket'
   },
   shim: {
     'underscore': {

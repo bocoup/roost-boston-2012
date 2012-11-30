@@ -1,4 +1,4 @@
-define([ 'backbone', 'underscore', './socket' ], function( B, _, socket ) {
+define([ 'backbone', 'underscore', 'socketio' ], function( B, _, socket ) {
   var SensorsCollection = B.Collection.extend({
     url: '/data/sensors',
 
