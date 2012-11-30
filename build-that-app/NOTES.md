@@ -80,6 +80,10 @@ branch includes: everything but router, functional tests
 
 ### Functional tests
 
+branch: functional-tests
+
+branch includes: everything but functional tests
+
 - when everything is written, we can open it in the browser and see it working
 - but what if we don't have to open the browser?
 - chromedriver, capybara
