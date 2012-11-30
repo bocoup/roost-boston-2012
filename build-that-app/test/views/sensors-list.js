@@ -20,10 +20,6 @@ define([
       sensorCollection = new B.Collection( sensors );
     });
 
-    teardown(function() {
-      $('#test').empty();
-    });
-
     test('Create a SensorsList view', function() {
       var sl = new SensorsList({
         collection: sensorCollection,

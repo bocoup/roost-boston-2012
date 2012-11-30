@@ -49,7 +49,7 @@ define([
       sd.destroy();
     });
 
-    test('Update sensor data', function() {
+    test('Update sensor data on model update', function() {
       var sd = new SensorDetail({
         model: sensorModel,
         el: '#test'
@@ -58,6 +58,7 @@ define([
       sd.render();
 
       sensorModel.set('data', [ 0, 1, 2, 3, 4 ]);
+
       assert.equal( $('#test .js-max').html(), '4' );
       assert.equal( $('#test .js-min').html(), '0' );
       assert.equal( $('#test .js-points').html(), '5' );
