@@ -1,8 +1,9 @@
-var sensors   = require( './sensors.js' );
+var arduino   = require( './sensors.js' );
+var sensors   = require( './test-sensors.js');
 var server    = require( './server.js' );
 
-sensors.board.on( 'ready', function() {
-  server( sensors.sensors() );
-});
+// arduino.board.on( 'ready', function() {
+//   server( arduino.sensors() );
+// });
 
-// server( sensors );
+server( sensors );
