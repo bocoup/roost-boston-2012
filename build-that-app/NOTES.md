@@ -16,7 +16,7 @@ branch includes: server, public dir, populated public/lib dir
   - data-main attribute points to /app/config
 - create simple /app/config.js
 - require.config
-  - paths: jquery, text plugin, tests
+  - paths: jquery, text plugin, tests, backbone, underscore
   - deps
 - shimming underscore, backbone
   - paths
@@ -71,18 +71,14 @@ We'll write a test, then write the code to make it pass.
 
 branch: integration
 
-branch includes: everything but router
+branch includes: everything but router, functional tests
 
 - Router
   - index
   - sensor detail
   - controller
 
-## Functional tests
-
-branch: integration
-
-branch includes: everything but functional tests
+### Functional tests
 
 - when everything is written, we can open it in the browser and see it working
 - but what if we don't have to open the browser?
