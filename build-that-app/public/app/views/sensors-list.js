@@ -1,7 +1,7 @@
 define([
-  './base',
+  'views/base',
   'text!./templates/sensor-list.html',
-  '/lib/jquery.sparkline.js'
+  'lib/jquery.sparkline'
 ], function( SuperView, tmpl ) {
   var SensorsList = SuperView.extend({
     template: tmpl,
