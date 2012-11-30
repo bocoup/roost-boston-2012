@@ -24,10 +24,6 @@ $( document ).ready(function() {
   setTimeout( sayGoodbye, 5000 );
 });
 
-
-
-
-
 // the problem with this code is that the two variables, as well as the
 // functions sayHello and sayGoodbye -- are all in the "global namespace". any
 // file that comes after this file can redefine them before our
@@ -46,11 +42,9 @@ console.log( bar ); // ReferenceError: bar is not defined!
 
 
 
-
-
 // so, we could make an "anonymous" function -- more accurately referred to as
 // a function expression -- that closes all of our variables, and pass it to
-// $(document).ready:
+// `$( document ).ready()`:
 
 $( document ).ready(function() {
   var firstName = 'Rebecca';
@@ -81,13 +75,16 @@ $( document ).ready(function() {
 // throw it in the global namespace; we need a way to put it in a function, but
 // we want to avoid having to give that function a name, because if we give it
 // a name, it will claim a space in the global namespace.
-//
-// enter the IIFE, or "immediately invoked function expression." we can use an
-// IIFE to keep "private" variables private, and only expose the code we want
-// to expose in the global namespace -- for example, by claiming *one* spot on
-// the global namespace that can act as the container for our application.
 
-(function( window ) {
+// enter the IIFE, or "immediately invoked function expression." we can use
+// an IIFE to keep "private" variables private, and only expose the code we
+// want to expose in the global namespace -- for example, by claiming *one*
+// spot on the global namespace that can act as the container for our
+// application.
+//
+// http://benalman.com/news/2010/11/immediately-invoked-function-expression/
+
+(function() {
   // create the application namespace if it's not already defined
   var myApp = window.myApp = window.myApp || {};
 
@@ -110,7 +107,7 @@ $( document ).ready(function() {
   // expose only what we need to expose
   myApp.sayHello = sayHello;
   myApp.sayGoodbye = sayGoodbye;
-}( window ));
+}());
 
 $( document ).ready(function() {
   myApp.sayHello();
@@ -124,7 +121,9 @@ $( document ).ready(function() {
 // IIFEs let us do other interesting things too -- since functions can return
 // values, we can use an IIFE to define an object that we assign to a variable,
 // while giving that object privileged access to variables defined inside of
-// the IIFE. This is called the module pattern.
+// the IIFE. This is the basis of the module pattern.
+//
+// http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth
 
 (function() {
 
@@ -227,8 +226,10 @@ var developerDan = {
 
 
 
+// ## call and apply
+//
 // we could be clever and use developerBen's introduce method to introduce
-// developerDan, as well:
+// developerDan, as well, via call and apply:
 
 developerBen.introduce.call( developerDan, 'Yo!' ); // Dan Heberden
 developerBen.introduce.apply( developerDan, [ 'Yo!' ] ); // Dan Heberden
@@ -321,3 +322,6 @@ define([ 'js/person' ], function( P ) {
     dan: new P( 'Dan', 'Heberden' )
   };
 });
+
+// if you're here for day 2, we'll dive into requirejs a bit more, but for now
+// let's take a look at setting up a simple app with it ...
