@@ -1,4 +1,8 @@
-var sensors   = require( './test-sensors.js' );
+var sensors   = require( './sensors.js' );
 var server    = require( './server.js' );
 
-server( sensors );
+sensors.board.on( 'ready', function() {
+  server( sensors.sensors() );
+});
+
+// server( sensors );

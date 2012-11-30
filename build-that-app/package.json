@@ -10,6 +10,7 @@
     "underscore": "~1.4.2",
     "grunt-mocha": "~0.1.7",
     "mocha": "~1.7.1",
-    "socket.io": "~0.9.11"
+    "socket.io": "~0.9.11",
+    "johnny-five": "~0.5.14"
   }
 }
