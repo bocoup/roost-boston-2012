@@ -141,7 +141,7 @@ $( document ).ready(function() {
       "Able was I ere I saw Elba"
     ];
 
-    // a public module method that accesses the
+    // a public module with a method that accesses the
     // private variable
     return {
       say: function() {
