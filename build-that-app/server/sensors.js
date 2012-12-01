@@ -44,34 +44,6 @@ module.exports = (function() {
     ];
   });
 
-  // board.on( 'ready', function() {
-  //   sensors = [
-  //     new Sensor(
-  //       'sensor-0',
-  //       'potentiometer',
-  //       new five.Sensor({ pin: 'A0', freq: 500 })
-  //     ),
-
-  //     new Sensor(
-  //       'sensor-1',
-  //       'temperature',
-  //       new five.Sensor({ pin: 'A1', freq: 500 })
-  //     ),
-
-  //     new Sensor(
-  //       'sensor-2',
-  //       'photocell',
-  //       new five.Sensor({ pin: 'A2', freq: 500 })
-  //     ),
-
-  //     new Sensor(
-  //       'sensor-3',
-  //       'motion',
-  //       new five.Sensor({ pin: 'A3', freq: 500 })
-  //     )
-  //   ];
-  // });
-
   return {
     board: board,
     sensors: function() {
