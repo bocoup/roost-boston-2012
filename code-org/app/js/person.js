@@ -5,9 +5,9 @@ define([ 'jquery' ], function( $ ) {
   };
 
   Person.prototype.introduce = function() {
-    $('<p>', {
+    return $('<p>', {
       text: 'My name is ' + this.firstName + ' ' + this.lastName
-    }).appendTo( 'body' );
+    });
   };
 
   return Person;

@@ -8,7 +8,8 @@
   require([ 'js/app' ], function( app ) {
     $(function() {
       [ 'ben', 'dan' ].forEach(function( p ) {
-        app[ p ].introduce();
+        var el = app[ p ].introduce();
+        el.appendTo( 'body' );
       });
     });
   });
