@@ -28,6 +28,37 @@ module.exports = function(grunt) {
         define: true
       }
     },
+
+    requirejs: {
+      compile: {
+        options: {
+          // https://github.com/jrburke/r.js/blob/master/build/example.build.js
+          appDir: 'public/',
+          baseUrl: './',
+
+          modules: [ { name: 'app/main' } ],
+          dir: 'build',
+
+          paths: {
+            underscore: 'lib/underscore',
+            backbone: 'lib/backbone',
+            jquery: 'lib/jquery',
+            text: 'lib/text'
+          },
+
+          shim: {
+            'underscore': {
+              exports: '_'
+            },
+            'backbone': {
+              exports: 'Backbone',
+              deps: [ 'jquery', 'underscore' ]
+            }
+          }
+        }
+      }
+    },
+
     mocha: {
       all: [ 'http://localhost:4000/_test' ]
     }
@@ -36,5 +67,6 @@ module.exports = function(grunt) {
   // Default task.
   grunt.registerTask('default', 'lint mocha');
   grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 };
