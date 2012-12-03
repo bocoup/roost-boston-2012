@@ -102,27 +102,6 @@ window.bar // 456
 
 
 
-/////////////////////////
-// Does a variable exist?
-/////////////////////////
-
-// If `foo` is accessed before being declared or initialized, an exception
-// will be thrown.
-if (foo) { /* code */ } // ReferenceError: foo is not defined
-
-// You can use the `typeof` operator to see if a variable is undefined or not.
-if (typeof foo !== "undefined") { /* code */ }
-
-// You can access global variables as a property of the global object. This
-// technique only works for global variables.
-if (window.foo !== undefined) { /* code */ }
-
-// In this case, the `in` operator is used to see if a global variable has
-// actually been declared, instead of looking at its value.
-if ("foo" in window) { /* code */ }
-
-
-
 
 
 
@@ -232,8 +211,8 @@ logEachArgument(1, 2, 3, 4, 5);
 // logs: 1 2 3 4 5
 
 
-// JavaScript doesn't support method overloading, but you can implement the
-// same logic by using conditionals and the arguments object.
+// You can look at arguments.length to determine the number of arguments
+// that were specified when the function was invoked.
 var _value;
 function getOrSet(value) {
   if (arguments.length === 0) {
@@ -561,7 +540,6 @@ String(false)       // "false"
 String(null)        // "null"
 String(undefined)   // "undefined"
 String([1, 2, 3])   // "1,2,3"
-String([])          // "" (because 0 items joined on "," is still "")
 String({a: 1})      // "[object Object]"
 String(String)      // "function String() { [native code] }"
 
@@ -575,7 +553,6 @@ Number("")          // 0
 Number(" ")         // 0
 Number(false)       // 0
 Number(true)        // 1
-Number([])          // 0 (because String([]) === "" and Number("") is 0)
 
 
 
@@ -615,7 +592,7 @@ foo + ""      // "function foo() { alert("hi!"); }"
 
 1 == true     // true (because true gets coerced to 1)
 
-// FWIW, these do the same things:
+// FWIW, these produce the same result:
 String(val) === "" + val
 Number(val) === +val
 Boolean(val) === !!val
@@ -944,11 +921,11 @@ obj.getAwesome("sauce"); // logs: "Awesome sauce"
 
 
 // Or you can use the more portable "this" value instead.
-obj.getAwesome2 = function(word) {
+obj.getAwesomeUsingThis = function(word) {
   console.log(this.awesome + " " + word);
 };
 
-obj.getAwesome2("possum"); // logs: "Awesome possum"
+obj.getAwesomeUsingThis("possum"); // logs: "Awesome possum"
 
 
 // What's the downside?
@@ -960,7 +937,7 @@ obj.getAwesome2("possum"); // logs: "Awesome possum"
 
 // But depending on how functions get invoked, the "this" value could
 // be the object, or it could be the GLOBAL OBJECT (whoops)
-["sauce", "possum"].forEach(obj.getAwesome2);
+["sauce", "possum"].forEach(obj.getAwesomeUsingThis);
 // "Horrible sauce"
 // "Horrible possum"
 
@@ -969,13 +946,14 @@ obj.getAwesome2("possum"); // logs: "Awesome possum"
 // When functions are invoked as they are being dereferenced from an
 // object, the "this" value inside the function refers to that object.
 
-   obj.getAwesome2("sauce");
-// ^^^ the "this" value inside of the .getAwesome2 function.
+   obj.getAwesomeUsingThis("sauce");
+// ^^^ the "this" value inside of the .getAwesomeUsingThis function.
 
 // But if the dereferencing...
-var myFunction = obj.getAwesome2;
+var myFunction = obj.getAwesomeUsingThis;
 
-// ...and the invoking are in two different steps... BAD THINGS HAPPEN
+// ...and the invoking are in two different steps, like when you pass
+// a function into another function... VERY BAD THINGS HAPPEN
 myFunction("fail"); // logs: "Horrible fail"
 
 
@@ -986,16 +964,22 @@ myFunction("fail"); // logs: "Horrible fail"
 myFunction.call(obj, "sauce"); // logs: "Awesome sauce"
 
 // And an .apply method, that works the same way but takes an array
-// of arguments.
+// of arguments (or an "arguments" object).
 myFunction.apply(obj, ["sauce"]); // logs: "Awesome sauce"
 
 
-// (Or an arguments object, but .bind is extra credit)
-function bind(fn, thisValue) {
-  return function() {
-    return fn.apply(thisValue, arguments);
-  };
-}
+// So, how do we solve our earlier problem? We can use .bind, which returns
+// a new function that has its "this" value locked-in.
+var getAwesome = obj.getAwesomeUsingThis.bind(obj);
+["sauce", "possum"].forEach(getAwesome);
+// "Awesome sauce"
+// "Awesome possum"
+
+// Also, the Array iterator methods accept a second argument, that if
+// specified, gets used as the "this" value.
+["sauce", "possum"].forEach(obj.getAwesomeUsingThis, obj);
+// "Awesome sauce"
+// "Awesome possum"
 
 
 
