@@ -158,6 +158,9 @@ addTwoNumbers(1, 2) // 3
 ["zero", "one", "two"].forEach(function(item, index) {
   console.log(item, index);
 });
+// "zero" 0
+// "one" 1
+// "two" 2
 
 
 
@@ -195,6 +198,9 @@ function prettyName(first, last) {
 }
 prettyName("bENjamIN", "alMan") // "Benjamin Alman"
 capitalize // ReferenceError: capitalize is not defined
+
+
+
 
 
 
@@ -486,20 +492,6 @@ parseFloat("3.14foobar")  // 3.14
 
 
 
-// There are also many static Math methods:
-Math.abs(-5)          // 5
-Math.min(1, 2, 3)     // 1
-Math.max(1, 2, 3)     // 3
-Math.sin(Math.PI / 2) // 1
-Math.cos(Math.PI)     // -1
-Math.pow(5, 2)        // 25
-Math.random()         // 0 <= num < 1
-Math.round(Math.PI)   // 3
-Math.floor(Math.PI)   // 3
-Math.ceil(Math.PI)    // 4
-
-
-
 ///////////////////
 // Null & Undefined
 ///////////////////
@@ -545,24 +537,33 @@ foo // null
 // Coercion and Comparison
 //////////////////////////
 
-// You can coerce values by passing a value into a type's function.
+// Coerce values by passing a value into a primitive type's function.
 
 // You can coerce to booleans:
-Boolean(0)          // false
-Boolean("")         // false
-Boolean(null)       // false
-Boolean(undefined)  // false
-Boolean(NaN)        // false
+Boolean(0)          // false \
+Boolean("")         // false  | Note: these five values are JavaScript's
+Boolean(null)       // false  | "falsy" values! They get treated just
+Boolean(undefined)  // false  | like false in "if" statement conditions.
+Boolean(NaN)        // false /
 Boolean(false)      // false
 Boolean(true)       // true
 Boolean("foo")      // true
+Boolean(" ")        // true
 Boolean(1)          // true
 Boolean({a: 1})     // true
 Boolean([1, 2, 3])  // true
 Boolean(Boolean)    // true
 
-// FWIW, those first five values (the ones that aren't false, but for which
-// the Boolean function returns false) are JavaScript's "falsy" values.
+// You can coerce to strings:
+String(123)         // "123"
+String(true)        // "true"
+String(false)       // "false"
+String(null)        // "null"
+String(undefined)   // "undefined"
+String([1, 2, 3])   // "1,2,3"
+String([])          // "" (because 0 items joined on "," is still "")
+String({a: 1})      // "[object Object]"
+String(String)      // "function String() { [native code] }"
 
 // You can coerce to numbers:
 Number("12")        // 12
@@ -571,34 +572,26 @@ Number("1.2")       // 1.2
 Number("1e3")       // 1000
 Number("1xy")       // NaN
 Number("")          // 0
+Number(" ")         // 0
 Number(false)       // 0
 Number(true)        // 1
-Number([])          // 0
-
-// You can coerce to strings:
-String(123)         // "123"
-String(true)        // "true"
-String(false)       // "false"
-String([1, 2, 3])   // "1,2,3"
-String([])          // ""
-String({a: 1})      // "[object Object]"
-String(String)      // "function String() { [native code] }"
+Number([])          // 0 (because String([]) === "" and Number("") is 0)
 
 
 
 // When an object is coerced to a string, its .toString() method is called.
-// "Plain" objects return a relatively useless string. Arrays are just
-// joined on ",". Most other things get stringified in some way.
-function add(a, b) { return a + b; }
-var obj = {a: 1, b: 2};
+// Array values are joined on comma. "Plain" objects return the relatively
+// useless "[object Object]" string. Etc.
+var fn = function(a, b) { return a + b; };
 var arr = [1, 2, 3];
+var obj = {a: 1, b: 2};
 
-add.toString()  // "function add(a, b) { return a + b; }"
-obj.toString()  // "[object Object]"
+fn.toString()   // "function (a, b) { return a + b; }"
 arr.toString()  // "1,2,3"
-String(add)     // "function add(a, b) { return a + b; }"
-String(obj)     // "[object Object]"
+obj.toString()  // "[object Object]"
+String(fn)      // "function (a, b) { return a + b; }"
 String(arr)     // "1,2,3"
+String(obj)     // "[object Object]"
 
 // You can change how an object is stringified by defining a .toString method.
 obj.toString = function() { return this.a + this.b; };
@@ -626,6 +619,9 @@ foo + ""      // "function foo() { alert("hi!"); }"
 String(val) === "" + val
 Number(val) === +val
 Boolean(val) === !!val
+
+
+
 
 
 
@@ -979,7 +975,7 @@ obj.getAwesome2("possum"); // logs: "Awesome possum"
 // But if the dereferencing...
 var myFunction = obj.getAwesome2;
 
-// ...and the invoking happen in two different steps...
+// ...and the invoking are in two different steps... BAD THINGS HAPPEN
 myFunction("fail"); // logs: "Horrible fail"
 
 
@@ -1029,7 +1025,7 @@ typeof /^foo$/i             // "function" (in some browsers)
 typeof undefined            // "undefined"
 typeof null                 // "object" ?!
 
-typeof NaN                  // "number" ?!
+typeof NaN                  // "number" ?!?!
 
 
 
@@ -1130,6 +1126,37 @@ toString.call(new Number(1))      // "[object Number]"
 
 toString.call("a")                // "[object String]"
 toString.call(new String("z"))    // "[object String]"
+
+toString.call([1, 2, 3])          // "[object Array]"
+toString.call({a: 1})             // "[object Object]"
+toString.call(/^foo$/)            // "[object RegExp]"
+toString.call(new Date())         // "[object Date]"
+toString.call(null)               // "[object Null]"
+toString.call(undefined)          // "[object Undefined]"
+
+
+// This is a very simple type-checking function that works for both
+// primitives and objects:
+function type(value) {
+  if (type == null) {     // Test for null or undefined, as Object .toString
+    return String(value); // doesn't work reliably for them in all browsers.
+  } else {
+    return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
+  }
+}
+
+type(false)              // "boolean"
+type(new Boolean(true))  // "boolean"
+type(0)                  // "number"
+type(new Number(1))      // "number"
+type("a")                // "string"
+type(new String("z"))    // "string"
+type([1, 2, 3])          // "array"
+type({a: 1})             // "object"
+type(/^foo$/)            // "regexp"
+type(new Date())         // "date"
+type(null)               // "null"
+type(undefined)          // "undefined"
 
 
 
