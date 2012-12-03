@@ -740,6 +740,31 @@ $.when(dataReq, tmplReq).then(function(data, tmpl) {
 
 
 
+// You can even create your own Deferred objects. In this example, the
+// getTemplate function returns a Deferred object. When the underlying
+// Ajax request completes successfully, the Deferred object is resolved
+// with the compiled template.
+var getTemplate = function(id) {
+  var dfd = $.Deferred();
+  $.get("/templates/" + id + ".tmpl").when(function(res) {
+    dfd.resolve( _.template(res) );
+  }, function(req, status, err) {
+    dfd.reject(status);
+  });
+  return dfd.promise();
+};
+
+var dataReq = $.getJSON("/data/person.json");
+var tmplReq = getTemplate("person");
+
+$.when(dataReq, tmplReq).then(function(data, tmplFn) {
+  // This code executes once both requests have resolved.
+  doSomething(data[0], tmplFn);
+});
+
+
+
+
 
 
 
