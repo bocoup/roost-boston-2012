@@ -1,8 +1,11 @@
 /*jshint strict:false */
 
-// the most basic level of code organization is keeping our code isolated
-// from other code. functions give us the ability to achieve this easily. for
-// example, consider a JS file that contains this code:
+// http://bit.ly/roost-code-org
+
+// the most basic level of code organization is keeping our code
+// isolated from other code. functions give us the ability to
+// achieve this easily. for example, consider a JS file that
+// contains this code:
 
 var firstName = 'Rebecca';
 var lastName = 'Murphey';
@@ -24,14 +27,15 @@ $( document ).ready(function() {
   setTimeout( sayGoodbye, 5000 );
 });
 
-// the problem with this code is that the two variables, as well as the
-// functions sayHello and sayGoodbye -- are all in the "global namespace". any
-// file that comes after this file can redefine them before our
-// $(document).ready callback has a chance to fire. likewise, our own code
-// might overwrite other definitions of these variables.
+// the problem with this code is that the two variables, as well as
+// the functions sayHello and sayGoodbye -- are all in the "global
+// namespace". any file that comes after this file can redefine them
+// before our $(document).ready callback has a chance to fire.
+// likewise, our own code might overwrite other definitions of these
+// variables.
 
-// we know that we can "close" variables inside a function, making them
-// inaccessible to code outside the function:
+// we know that we can "close" variables inside a function, making
+// them inaccessible to code outside the function:
 
 function foo() {
   var bar = 'baz';
@@ -42,9 +46,9 @@ console.log( bar ); // ReferenceError: bar is not defined!
 
 
 
-// so, we could make an "anonymous" function -- more accurately referred to as
-// a function expression -- that closes all of our variables, and pass it to
-// `$( document ).ready()`:
+// so, we could make an "anonymous" function -- more accurately
+// referred to as a function expression -- that closes all of our
+// variables, and pass it to `$( document ).ready()`:
 
 $( document ).ready(function() {
   var firstName = 'Rebecca';
@@ -70,17 +74,18 @@ $( document ).ready(function() {
 
 
 
-// this is a fine solution for code that needs to run when the document is
-// ready, but what about code that doesn't need to wait? we don't want to just
-// throw it in the global namespace; we need a way to put it in a function, but
-// we want to avoid having to give that function a name, because if we give it
-// a name, it will claim a space in the global namespace.
+// this is a fine solution for code that needs to run when the
+// document is ready, but what about code that doesn't need to wait?
+// we don't want to just throw it in the global namespace; we need a
+// way to put it in a function, but we want to avoid having to give
+// that function a name, because if we give it a name, it will claim
+// a space in the global namespace.
 
-// enter the IIFE, or "immediately invoked function expression." we can use
-// an IIFE to keep "private" variables private, and only expose the code we
-// want to expose in the global namespace -- for example, by claiming *one*
-// spot on the global namespace that can act as the container for our
-// application.
+// enter the IIFE, or "immediately invoked function expression." we
+// can use an IIFE to keep "private" variables private, and only
+// expose the code we want to expose in the global namespace -- for
+// example, by claiming *one* spot on the global namespace that can
+// act as the container for our application.
 //
 // http://benalman.com/news/2010/11/immediately-invoked-function-expression/
 
@@ -118,10 +123,11 @@ $( document ).ready(function() {
 
 
 
-// IIFEs let us do other interesting things too -- since functions can return
-// values, we can use an IIFE to define an object that we assign to a variable,
-// while giving that object privileged access to variables defined inside of
-// the IIFE. This is the basis of the module pattern.
+// IIFEs let us do other interesting things too -- since functions
+// can return values, we can use an IIFE to define an object that we
+// assign to a variable, while giving that object privileged access
+// to variables defined inside of the IIFE. This is the basis of the
+// module pattern.
 //
 // http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth
 
@@ -131,7 +137,6 @@ $( document ).ready(function() {
 
   // define our module
   myApp.SecretMessage = (function() {
-
     // a private variable that can't be accessed or
     // changed from outside of the module
     var secretMessages = [
@@ -140,12 +145,16 @@ $( document ).ready(function() {
       "Able was I ere I saw Elba"
     ];
 
+    // a private function
+    function getRandom( arr ) {
+      return arr[ Math.floor( Math.random() * arr.length ) ];
+    }
+
     // a public module with a method that accesses the
     // private variable
     return {
       say: function() {
-        var idx = Math.floor( Math.random() * secretMessages.length );
-        console.log( secretMessages[ idx ] );
+        console.log( getRandom( secretMessages ) );
       }
     };
   }());
@@ -159,10 +168,11 @@ $( document ).ready(function() {
 
 
 
-// we can use the module pattern to define more than just simple objects; it
-// becomes even more powerful when we use it to define a "constructor".
-// constructors let us make multiple instances of the same kind of object,
-// which is invaluable when it comes to testability.
+// we can use the module pattern to define more than just simple
+// objects; it becomes even more powerful when we use it to define a
+// "constructor". constructors let us make multiple instances of the
+// same kind of object, which is invaluable when it comes to
+// testability.
 
 (function() {
 
@@ -196,12 +206,13 @@ $( document ).ready(function() {
 
 
 
-// before we go much further, let's take a quick diversion for a sec to talk
-// about objects and prototypes. an object is a data structure of key/value
-// pairs; keys are strings, and values can be anything: strings, booleans,
-// arrays, functions, even other objects. when the value is a function, it is
-// referred to as a *method of the object*. when the value is anything else,
-// it is referred to as a *property of the object*.
+// before we go much further, let's take a quick diversion for a sec
+// to talk about objects and prototypes. an object is a data
+// structure of key/value pairs; keys are strings, and values can be
+// anything: strings, booleans, arrays, functions, even other
+// objects. when the value is a function, it is referred to as a
+// *method of the object*. when the value is anything else, it is
+// referred to as a *property of the object*.
 //
 // here's a simple example of an object:
 
@@ -228,17 +239,19 @@ var developerDan = {
 
 // ## call and apply
 //
-// we could be clever and use developerBen's introduce method to introduce
-// developerDan, as well, via call and apply:
+// we could be clever and use developerBen's introduce method to
+// introduce developerDan, as well, via call and apply:
 
-developerBen.introduce.call( developerDan, 'Yo!' ); // Dan Heberden
-developerBen.introduce.apply( developerDan, [ 'Yo!' ] ); // Dan Heberden
+developerBen.introduce.call( developerDan, 'Yo!' );
+// Dan Heberden
+developerBen.introduce.apply( developerDan, [ 'Yo!' ] );
+// Dan Heberden
 
 
 
-// or, we could split the introduction function off from both objects by
-// making it a named function that we assign to the introduce property of both
-// developer objects.
+// or, we could split the introduction function off from both
+// objects by making it a named function that we assign to the
+// introduce property of both developer objects.
 
 function introduce() {
   console.log( this.firstName, this.lastName );
@@ -258,16 +271,16 @@ var developerDan = {
 
 
 
-// or ... we could realize that what we actually have are two *instances* of
-// the same kind of object, and choose to use constructors and prototypes:
+// or ... we could realize that what we actually have are two
+// *instances* of the same kind of object, and choose to use
+// a constructor function and its prototype:
 
 var Person = function( firstName, lastName ) {
   // assign firstName and lastName properties to the instance
   this.firstName = firstName;
   this.lastName = lastName;
 
-  // return a new object that is an instance of Person
-  return this;
+  // return this;
 };
 
 // this method is shared by all instances of person
@@ -283,16 +296,47 @@ developerBen.introduce(); // Ben Alman
 developerDan.introduce(); // Dan Heberden
 
 
-// this works because methods (and properties) that are assigned to an
-// object's prototype are shared by all instances of the object.
+// this works because methods (and properties) that are assigned to
+// an object's prototype are shared by all instances of the object.
+
+
+// when we create methods and properties on a prototype, we can
+// change them per object
+
+var Person = function( firstName, lastName ) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  return this;
+};
+
+Person.prototype.introduce = function() {
+  console.log( this.firstName, this.lastName );
+};
+
+var developerDan = new Person( 'Dan', 'Heberden' );
+var developerBen = new Person( 'Ben', 'Alman' );
+
+developerBen.introduce(); // Ben Alman
+developerDan.introduce(); // Dan Heberden
+
+developerDan.introduce = function() {
+  console.log( 'Dan the Man' );
+};
+
+developerDan.introduce(); // Dan the Man
+developerBen.introduce(); // Ben Alman
 
 
 
 
 
 
-// these are all techniques for structuring code, but how do you actually
-// organize it in the filesystem? we want:
+
+
+// these are all techniques for structuring code, but how do you
+// actually organize it in the filesystem?
+//
+// we want:
 //
 // - modular files for development & testing
 // - built files for production
@@ -313,8 +357,8 @@ define(function() {
   return Person;
 });
 
-// if we save this in a file js/person.js, we can use it as a dependency for
-// another module definition
+// if we save this in a file js/person.js, we can use it as a
+// dependency for another module definition
 
 define([ 'js/person' ], function( P ) {
   return {
@@ -323,5 +367,6 @@ define([ 'js/person' ], function( P ) {
   };
 });
 
-// if you're here for day 2, we'll dive into requirejs a bit more, but for now
-// let's take a look at setting up a simple app with it ...
+// if you're here for day 2, we'll dive into requirejs a bit more,
+// but for now let's take a look at setting up a simple app with
+// it ...
