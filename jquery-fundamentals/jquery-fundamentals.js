@@ -154,6 +154,34 @@ $("form input[type='submit']").submit();
 
 
 
+//////////////////////
+// Know your selectors
+//////////////////////
+
+// Keep your selectors simple!
+var overlySpecific = $("body p#paragraph1");
+var specificEnough = $("#paragraph1"); // Single #id selectors are fast!
+
+// Know the difference between selectors?
+
+// What's the difference?
+$("li:odd").addClass("highlight");
+$("li:nth-child(odd)").addClass("selected");
+
+// What's the difference?
+$("li:first").addClass("highlight");
+$("li:first-child").addClass("selected");
+
+// What's the difference?
+$("p > a").addClass("highlight");
+$("p a").addClass("selected");
+$("p:has(a)").addClass("highlight");
+
+
+
+
+
+
 ///////////////////////
 // Other ways to select
 ///////////////////////
@@ -451,6 +479,23 @@ $("a").first().clone(true).insertAfter("#new-parent");
 
 
 
+///////////////////////////////////////////
+// Do as much work off-document as possible
+///////////////////////////////////////////
+
+// This adds the class AFTER the element has been appended to the
+// document, which causes an unnecessary reflow.
+$("<p>new content</p>").appendTo("#target").addClass("highlight");
+
+// This adds the class before appending the element, while it is still
+// only in memory.
+$("<p>new content</p>").addClass("highlight").appendTo("#target");
+
+
+
+
+
+
 ///////////
 // Chaining
 ///////////
@@ -692,3 +737,45 @@ $.when(dataReq, tmplReq).then(function(data, tmpl) {
   // This code executes once both requests have resolved.
   doSomething(data[0], tmpl[0]);
 });
+
+
+
+
+
+
+////////////////
+// Learn the API
+////////////////
+
+// Bookmark api.jquery.com and go there EVERY SINGLE DAY!
+
+// Find cool utilities like $.type:
+$.type(1)               // "number"
+$.type(new Number(1))   // "number"
+$.type({a: 1})          // "object"
+$.type([2, 3])          // "array" Awesome!
+
+// Or the more-specific type-related functions:
+$.isArray([2, 3])       // true
+$.isFunction($)         // true
+$.isPlainObject({})     // true
+
+// Or the $.extend() method for cloning and merging objects:
+var obj = {a: [1,2,3], b: [4,5,6]};
+
+// Shallow clone an object.
+var shallowClone = $.extend({}, obj);
+
+// Deep clone an object.
+var deepClone = $.extend(true, {}, obj);
+
+// Merge objects, preserving the original object.
+var mergedObj = $.extend({}, obj, {b: true, c: false});
+
+// Merge objects, modifying the original object.
+$.extend(obj, {b: true, c: false});
+
+
+
+
+
