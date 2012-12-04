@@ -2,6 +2,16 @@
 
 // http://bit.ly/roost-code-org
 
+
+
+
+
+
+
+
+
+
+
 // the most basic level of code organization is keeping our code
 // isolated from other code. functions give us the ability to
 // achieve this easily. for example, consider a JS file that
@@ -70,6 +80,7 @@ $( document ).ready(function() {
   setTimeout( sayGoodbye, 5000 );
 });
 
+console.log( say ); // ReferenceError: say is not defined
 
 
 
@@ -90,8 +101,15 @@ $( document ).ready(function() {
 // http://benalman.com/news/2010/11/immediately-invoked-function-expression/
 
 (function() {
-  // create the application namespace if it's not already defined
-  var myApp = window.myApp = window.myApp || {};
+
+}());
+
+
+
+// create the application namespace if it's not already defined
+window.myApp = window.myApp || {};
+
+(function() {
 
   // define variables and functions that are "closed" by the IIFE
   var firstName = 'Rebecca';
@@ -110,15 +128,20 @@ $( document ).ready(function() {
   }
 
   // expose only what we need to expose
-  myApp.sayHello = sayHello;
-  myApp.sayGoodbye = sayGoodbye;
+  window.myApp.sayHello = sayHello;
+  window.myApp.sayGoodbye = sayGoodbye;
 }());
 
 $( document ).ready(function() {
-  myApp.sayHello();
-  setTimeout( myApp.sayGoodbye, 5000 );
+  window.myApp.sayHello();
+  setTimeout( window.myApp.sayGoodbye, 5000 );
 });
 
+function foo() {
+  return 'bar';
+}
+
+var myVar = foo();
 
 
 
@@ -131,39 +154,37 @@ $( document ).ready(function() {
 //
 // http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth
 
-(function() {
+var myApp = window.myApp = window.myApp || {};
 
-  var myApp = window.myApp = window.myApp || {};
+// define our module
+myApp.SecretMessage = (function() {
+  // a private variable that can't be accessed or
+  // changed from outside of the module
+  var secretMessages = [
+    "Don't eat the yellow snow",
+    "Tacocat rides at midnight",
+    "Able was I ere I saw Elba"
+  ];
 
-  // define our module
-  myApp.SecretMessage = (function() {
-    // a private variable that can't be accessed or
-    // changed from outside of the module
-    var secretMessages = [
-      "Don't eat the yellow snow",
-      "Tacocat rides at midnight",
-      "Able was I ere I saw Elba"
-    ];
+  // a private function
+  function getRandom( arr ) {
+    return arr[ Math.floor( Math.random() * arr.length ) ];
+  }
 
-    // a private function
-    function getRandom( arr ) {
-      return arr[ Math.floor( Math.random() * arr.length ) ];
+  // a public module with a method that accesses the
+  // private variable
+  return {
+    say: function() {
+      console.log( getRandom( secretMessages ) );
+    },
+    addSecretMessage: function( msg ) {
+      secretMessages.push( msg );
     }
-
-    // a public module with a method that accesses the
-    // private variable
-    return {
-      say: function() {
-        console.log( getRandom( secretMessages ) );
-      }
-    };
-  }());
-
-  // use our module's public method
-  $( document ).ready( myApp.SecretMessage.say );
-
+  };
 }());
 
+// use our module's public method
+$( document ).ready( myApp.SecretMessage.say );
 
 
 
@@ -174,33 +195,29 @@ $( document ).ready(function() {
 // same kind of object, which is invaluable when it comes to
 // testability.
 
-(function() {
+var myApp = window.myApp = window.myApp || {};
 
-  var myApp = window.myApp = window.myApp || {};
+// define our module
+myApp.Person = (function() {
+  var Person = function( firstName, lastName ) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  };
 
-  // define our module
-  myApp.Person = (function() {
-    var Person = function( firstName, lastName ) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-    };
+  Person.prototype.introduce = function() {
+    console.log( 'My name is ' + this.firstName + ' ' + this.lastName );
+  };
 
-    Person.prototype.introduce = function() {
-      console.log( 'My name is ' + this.firstName + ' ' + this.lastName );
-    };
-
-    return Person;
-  }());
-
-  $( document ).ready(function() {
-    var r = new myApp.Person( 'Rebecca', 'Murphey' );
-    var j = new myApp.Person( 'Jory', 'Burson' );
-
-    r.introduce();
-    j.introduce();
-  });
-
+  return Person;
 }());
+
+$( document ).ready(function() {
+  var r = new myApp.Person( 'Rebecca', 'Murphey' );
+  var j = new myApp.Person( 'Jory', 'Burson' );
+
+  r.introduce();
+  j.introduce();
+});
 
 
 
@@ -224,7 +241,7 @@ var developerBen = {
   }
 };
 
-developerBen.introduce( 'Hello,' ); // Ben Alman
+developerBen.introduce( 'Hello,' ); // Hello, Ben Alman
 
 
 
@@ -242,10 +259,10 @@ var developerDan = {
 // we could be clever and use developerBen's introduce method to
 // introduce developerDan, as well, via call and apply:
 
-developerBen.introduce.call( developerDan, 'Yo!' );
-// Dan Heberden
-developerBen.introduce.apply( developerDan, [ 'Yo!' ] );
-// Dan Heberden
+developerBen.introduce.call( developerDan, 'Yo!', 'Hi', 'NO really' );
+// Yo! Dan Heberden
+developerBen.introduce.apply( developerDan, [ 'Yo!', 'Hi', 'NO realyy' ] );
+// Yo! Dan Heberden
 
 
 
@@ -271,16 +288,21 @@ var developerDan = {
 
 
 
+
+
 // or ... we could realize that what we actually have are two
 // *instances* of the same kind of object, and choose to use
 // a constructor function and its prototype:
 
 var Person = function( firstName, lastName ) {
-  // assign firstName and lastName properties to the instance
-  this.firstName = firstName;
-  this.lastName = lastName;
+  var myName = {
+    first: firstName,
+    last: lastName
+  };
 
-  // return this;
+  // assign firstName and lastName properties to the instance
+  this._firstName = firstName;
+  this._lastName = lastName;
 };
 
 // this method is shared by all instances of person
@@ -300,6 +322,9 @@ developerDan.introduce(); // Dan Heberden
 // an object's prototype are shared by all instances of the object.
 
 
+
+
+
 // when we create methods and properties on a prototype, we can
 // change them per object
 
@@ -313,19 +338,16 @@ Person.prototype.introduce = function() {
   console.log( this.firstName, this.lastName );
 };
 
+
 var developerDan = new Person( 'Dan', 'Heberden' );
 var developerBen = new Person( 'Ben', 'Alman' );
 
 developerBen.introduce(); // Ben Alman
 developerDan.introduce(); // Dan Heberden
 
-developerDan.introduce = function() {
+Person.prototype.introduce = function() {
   console.log( 'Dan the Man' );
-};
-
-developerDan.introduce(); // Dan the Man
-developerBen.introduce(); // Ben Alman
-
+}
 
 
 
