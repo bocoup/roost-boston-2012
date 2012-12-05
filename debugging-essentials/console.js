@@ -23,7 +23,7 @@ function console101() {
   // When supporting older browsers, you should test that the console exists
   // before using it.
   function log(msg) {
-    if (console && console.log) {
+    if (window.console && console.log) {
       console.log(msg);
     }
   }
