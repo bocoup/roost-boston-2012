@@ -1,0 +1,16 @@
+{
+  "name": "build-that-app",
+  "version": "0.0.0",
+  "main": "server/index.js",
+  "author": "Rebecca Murphey",
+  "license": "MIT/BSD",
+  "dependencies": {
+    "grunt-contrib-requirejs": "~0.3.3",
+    "express": "~3.0.3",
+    "underscore": "~1.4.2",
+    "grunt-mocha": "~0.1.7",
+    "mocha": "~1.7.1",
+    "socket.io": "~0.9.11",
+    "johnny-five": "~0.5.14"
+  }
+}

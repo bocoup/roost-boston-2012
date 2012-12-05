@@ -1,0 +1,7 @@
+body {
+  padding-top: 100px;
+}
+
+#sensor-detail p.sparkline {
+  margin: 20px 0;
+}

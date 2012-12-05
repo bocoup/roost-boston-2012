@@ -1,0 +1,18 @@
+<div class="row-fluid">
+<div class="well clearfix">
+  <div class="span4">
+    <img src="/img/<%= type %>.jpg" width="200">
+  </div>
+  <div class="span8">
+    <h1><%= name %> (<%= type %>)</h1>
+
+    <p class="sparkline"><span class="js-sparkline" values="<%=
+      data.slice(-200).join(',')
+    %>" style="font-size: 250%" sparkChartRangeMin="0" sparkChartRangeMax="100"></span></p>
+
+    <p>Min: <span class="js-min"><%= _.min( data ) %></span></p>
+    <p>Max: <span class="js-max"><%= _.max( data ) %></span></p>
+    <p>Data points: <span class="js-points"><%= data.length %></span></p>
+  </div>
+</div>
+</div>

@@ -1,0 +1,12 @@
+<ul class="nav nav-tabs nav-stacked">
+  <% _.each( data, function( sensor ) { %>
+  <li data-id="<%= sensor.id %>">
+    <a href="/sensors/<%= sensor.id %>">
+      <span class="sparklines" values="<%=
+        sensor.data.slice(-10).join(',')
+      %>" sparkChartRangeMin="0" sparkChartRangeMax="100"></span>
+      <%= sensor.name %> (<%= sensor.type %>)
+    </a>
+  </li>
+  <% }); %>
+</ul>
