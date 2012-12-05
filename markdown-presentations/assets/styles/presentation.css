@@ -1,0 +1,90 @@
+@import url(http://fonts.googleapis.com/css?family=Karla:400,700,700italic,400italic|Oswald:400,700);
+body {
+  font-family: 'Karla', sans-serif;
+}
+.CodeMirror {
+  float: left;
+  width: 96%;
+  border-radius: 5px;
+  background: #EEE;
+  padding: 0.9em 2% 0 ;
+  margin:1em 0 3em;
+}
+iframe {
+  width: 49%;
+  float: left;
+  height: 300px;
+  border: 1px solid black;
+  border-left: 0px;
+}
+.CodeMirror-scroll {
+	height:auto;
+}
+div.run {
+  margin: 1em 0em 3em;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, figure { 
+  clear: left;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.1em;
+  word-spacing: 0.15em;
+}
+
+body > h1 {
+  text-align: center;
+  width: 100%;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+body > h1 + h4, body >  h1 + h5,  body > h1 + h6 {
+  text-align: center;
+}
+
+body > h1, body > h2 {
+  margin-top: 12em;
+}
+
+h3 {
+  margin-top: 7em;
+}
+
+h4 {
+  margin-top: 3em;
+}
+
+li {
+  clear: left;
+}
+
+table td {
+  border: 1px solid #444;
+  padding: 0.5em;
+}
+
+div.run {
+  clear: both;
+}
+
+img {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.notes {
+  width:100%;
+  display:block;
+  text-align:right;
+  font-size: .8em;
+  color:#666;
+}

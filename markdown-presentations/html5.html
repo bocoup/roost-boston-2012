@@ -1,0 +1,603 @@
+<!DoctypE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+        <title>Roost 2012</title>
+        <!--
+  <script src=http://code.jquery.com/jquery.min.js></script>
+  <script src=assets/libs/codemirror/lib/codemirror.js></script>
+  <script src=assets/libs/codemirror/mode/xml/xml.js></script>
+  <script src=assets/libs/codemirror/mode/javascript/javascript.js></script>
+  <script src=assets/libs/codemirror/mode/css/css.js></script>
+  <script src=assets/libs/codemirror/mode/shell/shell.js></script>
+  <script src=assets/libs/codemirror/mode/htmlmixed/htmlmixed.js></script>
+  <link rel=stylesheet href=assets/libs/codemirror/lib/codemirror.css>
+  -->
+  <link rel=stylesheet type=text/css href=dist/built.min.css>
+</head>
+<body>
+	<h1>Dive Into HTML5</h1>
+
+<h4>Dan Heberden</h4>
+
+<h4><a href="mailto:dan@bocoup.com">dan@bocoup.com</a></h4>
+
+<h4>@danheberden</h4>
+
+<h1>HTML Basics</h1>
+
+<h2>What <em>IS</em> HTML?</h2>
+
+<p>HTML is a way to express the layout of a document by either labeling copy or inserting elements the browser will then style</p>
+
+<h3>Typical Markup</h3>
+
+<pre><code class="html-run">&lt;p&gt;This is paragraph &lt;b&gt;one&lt;/b&gt;.&lt;/p&gt;
+&lt;p&gt;This is paragraph &lt;i&gt;two&lt;/i&gt;&lt;/p&gt;
+</code></pre>
+
+<h2>Nesting order matters!</h2>
+
+<pre><code class="html">&lt;p&gt;This is paragraph &lt;b&gt;one.&lt;/p&gt;&lt;p&gt;&lt;/b&gt;.This is paragraph &lt;i&gt;two&lt;/i&gt;&lt;/p&gt;&quot;
+</code></pre>
+
+<p>The browser isn&#39;t even going to know what to do with this</p>
+
+<h2>So An HTML tag...</h2>
+
+<p>Is just stuff enclosed by &lt; and &gt;</p>
+
+<h2>What kind of Elements are there?</h2>
+
+<h3>Void Elements</h3>
+
+<p><code>area, base, br, col, command, embed, hr, img, input, keygen, link, meta, param, source, track, wbr</code></p>
+
+<h3>Raw Text Elements</h3>
+
+<p>These are elements that take content to be used elsewhere like <code>script</code> and <code>style</code></p>
+
+<h3>Comments</h3>
+
+<p>These get ignored by the browser for you to comment your markup 
+<code>&lt;!-- I&#39;m a comment! --&gt;</code></p>
+
+<h3>Normal Elements</h3>
+
+<p>Pretty much everything else: <code>p, div, strong, i, b...</code></p>
+
+<h3>Most normal Elements are <em>very</em> normal - they don&#39;t actually mean that much</h3>
+
+<ul>
+<li>Elements like <code>&lt;i&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;b&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;h1&gt;</code> through <code>&lt;/h6&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;li&gt;</code>, etc.. are just &quot;things&quot; but they have default styling from the browser and <em>some</em> have some special abilities (like lists)</li>
+</ul>
+
+<h2>Element Attributes</h2>
+
+<pre><code class="html">&lt;div id=&quot;this-is-a-unique-id-of-this-div&quot;&gt;HTML5!!!&lt;/div&gt;
+&lt;input type=&quot;input&quot;&gt;
+</code></pre>
+
+<p>Makes sense: the label of the attribute (i.e. what it&#39;s called) with an assignment to a value. </p>
+
+<h4>First, a DOCTYPE to tell the browser what we&#39;re doing</h4>
+
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+</code></pre>
+
+<p>This gets the browser out of quirks mode. Also notice the HTML5 DOCTYPE - no more of the
+awful <code>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</code>
+grossness.</p>
+
+<h4>A typical HTML Page</h4>
+
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;My HTML Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;We could add a heading!&lt;/h1&gt;
+    &lt;p&gt;It&#39;s a paragraph! You could make links to cool 
+       sites like &lt;a href=&quot;http://bocoup.com/&quot;&gt;Bocoup&lt;/a&gt; 
+       or add images of kitten. 
+       &lt;img src=&quot;http://placekitten.com/400/150&quot;&gt;
+    &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>HTML Resources</h2>
+
+<ul>
+<li>Boilerplate: <a href="http://html5boilerplate.com/">http://html5boilerplate.com/</a></li>
+<li>Validator: <a href="http://html5.validator.nu/">http://html5.validator.nu/</a></li>
+<li>Tutorials: <a href="http://htmldog.com/">http://htmldog.com/</a> <a href="http://diveintohtml5.info/">http://diveintohtml5.info/</a> <a href="http://www.html5rocks.com/en/">http://www.html5rocks.com/en/</a></li>
+<li>Reference: <a href="https://developer.mozilla.org/">https://developer.mozilla.org/</a></li>
+</ul>
+
+<h1>HTML5 &amp; You</h1>
+
+<p>If you heard HTML5 is better than a unicorn, you heard right!</p>
+
+<ul>
+<li>DOCTYPE is WAY easier to remember</li>
+<li>Write clean HTML with more expressive elements</li>
+<li>New elements to accomplish much more in the browser</li>
+<li>New APIs for those elements to not only have them on the page, but interact with them</li>
+</ul>
+
+<h2>Some addendas, um, provisos... some quid pro quo&#39;s</h2>
+
+<h3>HTML is pretty flexible</h3>
+
+<p>Because it isn&#39;t based on XML, HTML can be a bit flexible with some tags if you wish to not either 
+* close them
+* self close them</p>
+
+<h4>Self close them?</h4>
+
+<p>In XML, a &#39;node&#39; that is all by itself would need to be self closed - like an image tag would have to be <code>&lt;img /&gt;</code> instead of <code>&lt;img&gt;</code> so that the parser wasn&#39;t forever looking for <code>&lt;/img&gt;</code>.</p>
+
+<pre><code class="html">&lt;ul&gt;
+  &lt;li&gt;some text
+  &lt;li&gt;An li can&#39;t have a child li, so the browser knows to just close it
+&lt;/ul&gt;   
+or
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;A Column
+    &lt;td&gt;Another Column
+&lt;/table&gt;
+</code></pre>
+
+<h3>Attribute flags can be simplified</h3>
+
+<p>While this is perfectly valid:</p>
+
+<pre><code class="html-run">&lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot;&gt; Checked Already
+</code></pre>
+
+<p>The extra <code>=&quot;checked&quot;</code> is unncessary - the browser knows what you mean:</p>
+
+<pre><code class="html-run">&lt;input type=&quot;checkbox&quot; checked&gt; Checked Already
+</code></pre>
+
+<h2>So about those non-normal elements</h2>
+
+<h4>Void Elements</h4>
+
+<p>These are things like <code>&lt;input&gt;</code> and <code>&lt;img&gt;</code> that are elements in-and-of themselves. They aren&#39;t formatting or containers, they are actual <em>things</em>. Thus, they cannot have content. So </p>
+
+<pre><code class="html">&lt;input type=&quot;text&quot;&gt;&lt;/input&gt;
+</code></pre>
+
+<p>is invalid because input could <em>never</em> have content</p>
+
+<p>This is still valid </p>
+
+<pre><code class="html">&lt;input type=&quot;text&quot; /&gt;
+</code></pre>
+
+<p>but not necessary. This is totally legit:</p>
+
+<pre><code class="html">&lt;input type=&quot;text&quot;&gt;
+</code></pre>
+
+<h2>So we talked about HTML a bunch, but what&#39;s new?</h2>
+
+<ul>
+<li>Semantic Elements</li>
+<li>New Input Types</li>
+<li>CSS3</li>
+<li>Drag &amp; Drop</li>
+<li>Canvas</li>
+<li>WebGL</li>
+<li>Video &amp; Audio</li>
+<li>Golocation</li>
+<li>Web Storage</li>
+<li>Web Workers</li>
+<li>Offline Web Applications</li>
+<li>Web Sockets</li>
+<li>SVG</li>
+<li>MathML</li>
+</ul>
+
+<h3>HTML5 Semantic Elements</h3>
+
+<p>Use them!</p>
+
+<pre><code class="html">&lt;article&gt;
+&lt;aside&gt;
+&lt;command&gt;
+&lt;datalist&gt;
+&lt;details&gt;
+&lt;figure&gt;
+&lt;figcaption&gt;
+&lt;footer&gt;
+&lt;header&gt;
+&lt;hgroup&gt;
+&lt;mark&gt;
+&lt;meter&gt;
+&lt;nav&gt;
+&lt;output&gt;
+&lt;section&gt;
+&lt;summary&gt;
+&lt;time&gt;
+</code></pre>
+
+<h3>Semantic Elements Example</h3>
+
+<pre><code class="html-run">&lt;header&gt;
+    &lt;h1&gt;Build New Games&lt;/h1&gt;
+&lt;/header&gt;
+&lt;article&gt;
+    Published &lt;time&gt;2011-01-28&lt;/time&gt;
+    &lt;hgroup&gt;
+        &lt;h1&gt;Some article on BNG&lt;/h1&gt;
+        &lt;h2&gt;By Greg Smith&lt;/h2&gt;
+    &lt;/hgroup&gt;
+    &lt;summary&gt;
+        This is an article about my day.
+    &lt;/summary&gt;
+    &lt;section&gt;
+        &lt;p&gt;My article content.&lt;/p&gt;
+        &lt;aside&gt;By the way...&lt;/aside&gt;
+        &lt;p&gt;More content&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+        &lt;p&gt;Second section&lt;/p&gt;
+    &lt;/section&gt;
+&lt;/article&gt;
+&lt;footer&gt;
+    © 2011 Greg Smith
+&lt;/footer&gt;
+</code></pre>
+
+<h3>HTML5 Input Types</h3>
+
+<p>Your mileage may vary</p>
+
+<pre><code class="html-run">&lt;input type=tel&gt;
+&lt;input type=search&gt;
+&lt;input type=url&gt;
+&lt;input type=email&gt;
+&lt;input type=datetime&gt;
+&lt;input type=date&gt;
+&lt;input type=month&gt;
+&lt;input type=week&gt;
+&lt;input type=time&gt;
+&lt;input type=datetime-local&gt;
+&lt;input type=number&gt;
+&lt;input type=range&gt;
+&lt;input type=color&gt;
+</code></pre>
+
+<p>Old browsers treat these as <code>type=&quot;text&quot;</code></p>
+
+<p>Check out <a href="http://caniuse.com/#feat=forms">caniuse.com</a> for compatibility information</p>
+
+<h3>When can I use HTML5?</h3>
+
+<ul>
+<li>Modern browsers. IE9, Firefox, Chrome, Safari, Opera</li>
+<li>Designed to be ignored by older browsers</li>
+<li>Workarounds for older browsers. IE6, IE7, IE8</li>
+<li>Don&#39;t wait until 2022</li>
+<li>html5readiness.com</li>
+<li>caniuse.com</li>
+</ul>
+
+<h3>Supporting Older Browsers</h3>
+
+<h4>Semantic elements in older browsers</h4>
+
+<p><a href="http://code.google.com/p/html5shim/">HTML5 Shim / Shiv</a></p>
+
+<h4>Feature Detection</h4>
+
+<p><a href="http://www.modernizr.com/">Modernizr</a></p>
+
+<h4>Polyfills</h4>
+
+<p><a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills">Go to Modernizr.com and click cross-browser polyfills</a></p>
+
+<h1>Form Validation</h1>
+
+<pre><code class="html-run">Email Address: &lt;input type=&quot;email&quot; name=&quot;email&quot; 
+  required placeholder=&quot;Enter a valid email address&quot;&gt;
+</code></pre>
+
+<pre><code class="html-run">Website: &lt;input type=&quot;url&quot; name=&quot;website&quot; 
+   required pattern=&quot;https?://.+&quot;&gt;
+</code></pre>
+
+<pre><code class="html-run">Age: &lt;input type=&quot;number&quot; size=&quot;6&quot; 
+  name=&quot;age&quot; min=&quot;18&quot; max=&quot;99&quot; value=&quot;21&quot;&gt;
+</code></pre>
+
+<h2>Data Attributes</h2>
+
+<p>A standard way to attach data to elements</p>
+
+<pre><code class="html">&lt;div id=&quot;person&quot; data-nickname=&quot;Bob&quot;&gt;Bocoup Mascot&lt;/div&gt;
+</code></pre>
+
+<h3>dataset:</h3>
+
+<ul>
+<li>chrome 8+ </li>
+<li>firefox 6+</li>
+<li>opera 11.10+</li>
+<li>safari 6+</li>
+<li>no ie</li>
+</ul>
+
+<pre><code class="javascript">var element = document.getElementById(&#39;person&#39;);
+element.dataset.nickname;
+</code></pre>
+
+<h3>getAttribute: supported everywhere</h3>
+
+<pre><code class="javascript"> element.getAttribute(&#39;data-nickname&#39;);
+</code></pre>
+
+<h3>the jQuery way</h3>
+
+<pre><code class="javascript">$(&quot;#person&quot;).data(&quot;nickname&quot;);
+</code></pre>
+
+<h1>HTML5 - not just markup</h1>
+
+<h2>Video</h2>
+
+<pre><code class="html-run">&lt;video src=&quot;assets/video/popcorn.webm&quot; poster=&quot;assets/video/poster.png&quot; controls&gt;  
+  Your browser does not support the video element.  
+&lt;/video&gt;
+</code></pre>
+
+<h3>Fully Scriptable</h3>
+
+<pre><code class="javascript">document.getElementById(&quot;#video&quot;).play();
+</code></pre>
+
+<p><a href="http://popcornjs.org/">http://popcornjs.org/</a></p>
+
+<h3>Video format support is complicated</h3>
+
+<p><a href="http://en.wikipedia.org/wiki/HTML5_video#Browser_support">http://en.wikipedia.org/wiki/HTML5_video#Browser_support</a></p>
+
+<h2>Audio</h2>
+
+<p>Frederic Chopin - Opus 10 - Twelve Grand Etudes in F minor</p>
+
+<pre><code class="html-run">&lt;audio controls&gt;
+  &lt;source src=&quot;assets/audio/chopin.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
+  &lt;source src=&quot;assets/audio/chopin.ogg&quot; type=&quot;audio/ogg&quot;&gt;
+  Your browser does not support the audio element.  
+&lt;/audio&gt;
+</code></pre>
+
+<p><img src="assets/img/audio-chart.png" alt="Audio Chart"></p>
+
+<h3>mp3 + ogg</h3>
+
+<h2>Canvas</h2>
+
+<pre><code class="html">&lt;canvas id=&quot;myCanvas&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;
+  Canvas is not supported in your browser
+&lt;/canvas&gt;
+</code></pre>
+
+<pre><code class="javascript">var canvasElem = document.getElementById(&#39;myCanvas&#39;);
+var ctx = canvasElem.getContext(&#39;2d&#39;);
+ctx.fillStyle = &quot;rgba(255,0,0,.5)&quot;;  
+ctx.fillRect(10, 10, 100, 100);
+ctx.fillStyle = &quot;rgba(0,0,255,.5)&quot;;  
+ctx.fillRect(60, 60, 100, 100);
+</code></pre>
+
+<pre><code class="html-run-only">&lt;canvas id=&quot;myCanvas&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;
+  Canvas is not supported in your browser
+&lt;/canvas&gt;
+</code></pre>
+
+<h2>Geolocation</h2>
+
+<pre><code class="javascript">function success(position) {  
+  var result = &#39;Your latitude is &#39; +
+               position.coords.latitude +
+               &#39; and your longitude is &#39; +
+               position.coords.longitude);  
+  alert(result);
+}
+
+function err() {
+  alert(&#39;Could not get your location.&#39;);
+}
+
+navigator.geolocation.getCurrentPosition(success, err);
+</code></pre>
+
+<pre><code class="html-run-only">&lt;button id=&quot;geolocation&quot;&gt;Get My Location!&lt;/button&gt;
+</code></pre>
+
+<h2>Web Storage</h2>
+
+<pre><code class="javascript">$(&#39;#localStorageSet&#39;).submit(function(e) {
+  var val = $(&#39;#localStorageInput&#39;).val();
+  localStorage.setItem(&quot;myValue&quot;, val);
+  alert(&#39;Value set to &#39; + val);
+  e.preventDefault();
+});
+
+$(&#39;#localStorageGet&#39;).submit(function(e) {
+  alert(localStorage.getItem(&quot;myValue&quot;));
+  e.preventDefault();
+});
+</code></pre>
+
+<pre><code class="html-run-only">&lt;form id=&quot;localStorageSet&quot; style=&quot;padding: 0;&quot;&gt;
+    &lt;input id=&quot;localStorageInput&quot;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Set Stored Value&quot;&gt;
+&lt;/form&gt;
+&lt;form id=&quot;localStorageGet&quot;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Get Stored Value&quot;&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p><a href="http://westcoastlogic.com/lawnchair/">lawnchair</a></p>
+
+<h2>Web Sockets</h2>
+
+<ul>
+<li><p>Instant communication between client and server</p></li>
+<li><p>Server can &quot;Push&quot; to client rather than waiting for a request</p></li>
+<li><p>A good library to use is Socket.IO</p></li>
+</ul>
+
+<pre><code class="javascript">var socket = io.connect(&#39;http://localhost&#39;);
+socket.on(&#39;news&#39;, function(data) {
+  console.log(data);
+  socket.emit(&#39;my other event&#39;, {my: &#39;data&#39;});
+});
+</code></pre>
+
+<p>Useful for things like synchronous chat, online games</p>
+
+<h2>Feature Detection</h2>
+
+<h4>Check if feature is there, don&#39;t detect browser</h4>
+
+<p><a href="http://modernizr.com/">Modernizr</a></p>
+
+<pre><code class="javascript">if ( Modernizr.canvas ) {
+  // do something with canvas
+}
+else {
+  // fallback for people with older browsers
+}
+</code></pre>
+
+<h2>Polyfills</h2>
+
+<ul>
+<li><p>Provide modern features to older browsers</p></li>
+<li><p>Conditional resource loader like yepnope is useful</p></li>
+</ul>
+
+<pre><code class="javascript">yepnope({
+  test : Modernizr.geolocation,
+  yep  : &#39;normal.js&#39;,
+  nope : [&#39;polyfill.js&#39;, &#39;wrapper.js&#39;]
+});
+</code></pre>
+
+<p>Modernizr doesn&#39;t provide polyfills, but they have a <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills">great list of polyfills you can use</a></p>
+
+<h1>File API</h1>
+
+<pre><code class="javascript">  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+      output.push(&#39;&lt;li&gt;&lt;strong&gt;&#39;, escape(f.name), &#39;&lt;/strong&gt; (&#39;, f.type || &#39;n/a&#39;, &#39;) - &#39;,
+                  f.size, &#39; bytes, last modified: &#39;,
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : &#39;n/a&#39;,
+                  &#39;&lt;/li&gt;&#39;);
+    }
+    document.getElementById(&#39;list&#39;).innerHTML = &#39;&lt;ul&gt;&#39; + output.join(&#39;&#39;) + &#39;&lt;/ul&gt;&#39;;
+  }
+
+  document.getElementById(&#39;files&#39;).addEventListener(&#39;change&#39;, handleFileSelect, false);
+</code></pre>
+
+<pre><code class="html-run">&lt;input type=&quot;file&quot; id=&quot;files&quot; name=&quot;files[]&quot; multiple /&gt;
+&lt;output id=&quot;list&quot;&gt;&lt;/output&gt;
+</code></pre>
+
+<h3>Drag and Drop</h3>
+
+<pre><code class="javascript"> function handleFileSelect2(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+      output.push(&#39;&lt;li&gt;&lt;strong&gt;&#39;, escape(f.name), &#39;&lt;/strong&gt; (&#39;, f.type || &#39;n/a&#39;, &#39;) - &#39;,
+                  f.size, &#39; bytes, last modified: &#39;,
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : &#39;n/a&#39;,
+                  &#39;&lt;/li&gt;&#39;);
+    }
+    document.getElementById(&#39;drag-list&#39;).innerHTML = &#39;&lt;ul&gt;&#39; + output.join(&#39;&#39;) + &#39;&lt;/ul&gt;&#39;;
+  }
+
+  function handleDragOver(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = &#39;copy&#39;; // Explicitly show this is a copy.
+  }
+
+  // Setup the dnd listeners.
+  var dropZone = document.getElementById(&#39;drop_zone&#39;);
+  dropZone.addEventListener(&#39;dragover&#39;, handleDragOver, false);
+  dropZone.addEventListener(&#39;drop&#39;, handleFileSelect, false);
+</code></pre>
+
+<pre><code class="html-run">&lt;div id=&quot;drop_zone&quot;&gt;Drop files here&lt;/div&gt;
+&lt;output id=&quot;drag-list&quot;&gt;&lt;/output&gt;
+</code></pre>
+
+<h1>SVG</h1>
+
+<pre><code class="html-run"> &lt;style&gt;
+    svg {
+      height: 180px;
+    }
+    rect {
+      stroke: white;
+      fill: blue;
+    }
+  &lt;/style&gt;
+  &lt;svg&gt;
+    &lt;rect stroke-width=&quot;2px&quot;
+          x=&quot;50px&quot;
+          y=&quot;50px&quot;
+          width=&quot;100px&quot;
+          height=&quot;100px&quot;&gt;
+    &lt;animateTransform          
+        attributeName=&quot;transform&quot;
+        type=&quot;rotate&quot;
+        from=&quot;0,100,100&quot; to=&quot;360,100,100&quot;
+        begin=&quot;0s&quot; dur=&quot;3s&quot;
+        repeatCount=&quot;indefinite&quot;/&gt;
+    &lt;/rect&gt;
+  &lt;/svg&gt;
+</code></pre>
+
+<ul>
+<li>IE 6-8 NONE</li>
+<li>IE 9+ Partial</li>
+<li>Firefox Partial 1.1 Full</li>
+<li>Firefox 3 More 1.1 Full</li>
+<li>Chrome / Safari Partial 1.1 Full</li>
+<li>Opera 8 1.1 Tiny</li>
+<li>Opera 9 1.1 Basic / Partial 1.1 Full</li>
+<li>Opera 9.5 Partial 1.2 Basic</li>
+</ul>
+
+<h1>That&#39;s all I got - any questions?</h1>
+
+<p>Dan Heberden
+<a href="mailto:dan@bocoup.com">dan@bocoup.com</a>
+@danheberden</p>
+
+	<script src="dist/presentation.js"></script>
+</body>
+</html>

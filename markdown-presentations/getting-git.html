@@ -1,0 +1,583 @@
+<!DoctypE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+        <title>Roost 2012</title>
+        <!--
+  <script src=http://code.jquery.com/jquery.min.js></script>
+  <script src=assets/libs/codemirror/lib/codemirror.js></script>
+  <script src=assets/libs/codemirror/mode/xml/xml.js></script>
+  <script src=assets/libs/codemirror/mode/javascript/javascript.js></script>
+  <script src=assets/libs/codemirror/mode/css/css.js></script>
+  <script src=assets/libs/codemirror/mode/shell/shell.js></script>
+  <script src=assets/libs/codemirror/mode/htmlmixed/htmlmixed.js></script>
+  <link rel=stylesheet href=assets/libs/codemirror/lib/codemirror.css>
+  -->
+  <link rel=stylesheet type=text/css href=dist/built.min.css>
+</head>
+<body>
+	<h1>getting a grip on git</h1>
+
+<p>Dan Heberden - @danheberden - bocoup.com</p>
+
+<pre><code class="notes">Installing git: http://git-scm.com/book/en/Getting-Started-Installing-Git
+
+If you&#39;re looking to use git with a GUI, I recommend http://www.git-tower.com/
+</code></pre>
+
+<h2>clear your minds</h2>
+
+<pre><code class="notes">`revision control`, `version control`, `source control`, `svn`, `cvs` -
+forget about it
+</code></pre>
+
+<h2>Version Control</h2>
+
+<h3>the technology is all over</h3>
+
+<p>google docs</p>
+
+<p>time machine</p>
+
+<p>wordpress</p>
+
+<h2>the obvious part</h2>
+
+<p>you can access the history of what you did</p>
+
+<h4>Revision 1</h4>
+
+<pre><code class="text">+ We really hope you are enjoying roost!
+</code></pre>
+
+<h4>Revision 2</h4>
+
+<pre><code class="text">  We really hope you are enjoying roost!
++ Aren&#39;t Rebecca and Ben awesome?
+</code></pre>
+
+<h4>Revision 3</h4>
+
+<pre><code class="text">+ Roost! It&#39;s really that awesome
+- We really hope you are enjoying roost!
+  Aren&#39;t Rebecca and Ben awesome?
+</code></pre>
+
+<p>Here&#39;s the hangup: this isn&#39;t what git is about. </p>
+
+<h2>huh?</h2>
+
+<ul>
+<li>it&#39;s how revisions work, but you would probably think up the same thing</li>
+<li>the power is in the tooling that pulls apart and pushes back together revisions. </li>
+<li>tooling that helps you make revisions amongst multiple members of a team. </li>
+<li>tooling that lets you take a bunch of revisions and label them as a fixed point in a time-line, so to speak. </li>
+</ul>
+
+<h4>And the best tool for that? Any guesses?</h4>
+
+<h1>git</h1>
+
+<p><img src="http://placekitten.com/800/400" alt="a kitten for some awws!"></p>
+
+<h3>running example</h3>
+
+<p>Have to make plugin that truncates text after 500 chars and adds …</p>
+
+<h2>first things first</h2>
+
+<p>make a git repository</p>
+
+<h3>a git what?</h3>
+
+<p>think of a git &quot;repository&quot; as a project - it takes a folder, makes a folder
+inside of it called <code>.git</code> and stores all the git information about it. </p>
+
+<h3>What&#39;s cool is how git interacts with the file system.</h3>
+
+<h3>quick look</h3>
+
+<p>grab a copy of jQuery from a public git-based service (github.com)</p>
+
+<pre><code class="bash">$ git checkout 1.8.3
+$ head -5 package.json #print out the first 5 lines
+4
+  &quot;name&quot;: &quot;jquery&quot;,
+  &quot;title&quot;: &quot;jQuery&quot;,
+  &quot;description&quot;: &quot;JavaScript library for DOM operations&quot;,
+  &quot;version&quot;: &quot;1.8.3&quot;,
+</code></pre>
+
+<p>now let&#39;s tell git we want to look at version 1.8.1</p>
+
+<pre><code class="bash">$ git checkout 1.8.1
+$ head -5 package.json #print out the first 5 lines
+{
+  &quot;name&quot;: &quot;jquery&quot;,
+  &quot;title&quot;: &quot;jQuery&quot;,
+  &quot;description&quot;: &quot;JavaScript library for DOM operations&quot;,
+  &quot;version&quot;: &quot;1.8.1&quot;,
+</code></pre>
+
+<p>the file system responds to what you do in git - which is
+awesome and A VERY KEY POINT. </p>
+
+<h3>so lets make our own repo</h3>
+
+<pre><code class="bash">$ cd ~\Projects
+$ mkdir roost
+$ cd roost
+</code></pre>
+
+<p>now the fun part</p>
+
+<pre><code class="bash">$ git init
+Initialized empty Git repository in /Users/danheberden/Projects/roost/.git/
+</code></pre>
+
+<pre><code class="bash">git &lt;command&gt; arguments...
+</code></pre>
+
+<p>give it a shot</p>
+
+<pre><code class="bash">$ git status
+# On branch master
+#
+# Initial commit
+#
+nothing to commit (create/copy files and use &quot;git add&quot; to track)
+</code></pre>
+
+<pre><code class="notes">that makes sense - we didn&#39;t, you know, *do* anything yet. 
+so we have a repo now! \o/ 
+</code></pre>
+
+<h2>let&#39;s do stuff</h2>
+
+<pre><code>$ cd ~/Projects
+$ mkdir ellipser
+$ cd ellipser
+$ grunt init:jquery
+
+# follow prompts #
+
+</code></pre>
+
+<pre><code class="notes">edit project to have ellipser name and stuff
+</code></pre>
+
+<h3>What&#39;s going on?</h3>
+
+<pre><code class="bash">$ git status
+# On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+#
+# committedCONTRIBUTING.md
+# mdLICENSE-MIT
+# MITREADME.md
+# ( ... removed files for brevity )
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+</code></pre>
+
+<h3>Untracked</h3>
+
+<p><code>git</code> is smart</p>
+
+<pre><code class="notes">It realizes that you might have files that you don&#39;t
+want to add. It also sees that you changed files in the folder that you haven&#39;t 
+told `git` to do anything with. 
+So if we tried to actually `commit` our files (more on this in a minute) git 
+won&#39;t have anything to actually commit.
+</code></pre>
+
+<pre><code class="bash">$ git commit
+# ...
+# nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+</code></pre>
+
+<p>we want control</p>
+
+<p><code>notes
+Having `git` track little change you make would be a nightmare to browse through,
+track meaningful changes to code, and wouldn&#39;t let you describe those actions at all.
+</code>`</p>
+
+<h2>Meet <code>commit</code></h2>
+
+<p>takes a snapshot of the changes and adds them to your current branch</p>
+
+<pre><code class="notes">We haven&#39;t discussed branches yet, but we are on the default
+&quot;main&quot; branch, called `master`. 
+</code></pre>
+
+<p>com•mit v. <em>to hand over, as for safekeeping; charge; entrust</em></p>
+
+<pre><code class="notes">This is essentially what a commit does. All of the files you have said to add to the current
+branch will be handed over to it. Additionally, `git` asks for a message describing the 
+action. This makes reviewing past actions much more informative. 
+</code></pre>
+
+<h3>So lets add some files!</h3>
+
+<pre><code class="bash">$ git add *
+
+# new files listed
+</code></pre>
+
+<pre><code class="bash">$ git status
+
+# roughly the same output
+</code></pre>
+
+<pre><code class="notes">Before, they were &quot;untracked&quot; - meaning, they were in the &quot;staging&quot;
+area of git. 
+
+&quot;staging&quot; = where you are in your git repository v.s. changes to the git working 
+tree (the folder you made a git repo). 
+</code></pre>
+
+<h3>time to commit</h3>
+
+<pre><code class="bash">$ git commit
+</code></pre>
+
+<p>add a commit message</p>
+
+<pre><code class="bash">
+# Please enter the commit message for your changes. Lines starting
+# with &#39;#&#39; will be ignored, and an empty message aborts the commit.
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+#
+#       new file:   CONTRIBUTING.md
+# ...
+</code></pre>
+
+<p>add a description of what this commit does up top</p>
+
+<pre><code>Create plugin grunt project and add template code.
+
+# Please enter the commit message for your changes. Lines starting
+# ...
+</code></pre>
+
+<p>When you save and close the file, <code>git</code> reacts:</p>
+
+<pre><code class="bash">[master (root-commit) 130c598] init
+ 13 files changed, 11613 insertions(+)
+</code></pre>
+
+<p>We just added a commit! But what is <code>130c598</code>?</p>
+
+<h2>SHA</h2>
+
+<p>Every commit creates a unique checksum (using SHA-1) of the changes and their location, resulting in a long<br>
+40 character ID. </p>
+
+<p>Typically, the first 7 or 8 characters are used to represent this SHA. 
+So <code>130c598</code> is short for <code>130c59894b35988b7176127de80dac1af174ad9d</code>. </p>
+
+<p>This is important - every commit is a &quot;thing&quot; to git. It&#39;s a dot in your repositories timeline that has
+much significance. </p>
+
+<h2>More stuff</h2>
+
+<p>Let&#39;s add some actual code to our plugin:</p>
+
+<pre><code class="javscript">$.fn.ellipser = function() {
+  return this.each(function() {
+    var $el = $( this );
+    var txt = $el.html();
+    if ( txt &gt; 500 ) {
+      $el.html( txt.slice(0,500) + &#39;…&#39; );
+    }
+  });
+};
+</code></pre>
+
+<p>Super basic and generally crappy, but it&#39;s a start. </p>
+
+<pre><code class="bash">$ git add src/ellipser.js
+</code></pre>
+
+<p>even if you make a change to the document, git needs to be told to
+do something with it - thus, you have to re <code>git add</code> if you edit the 
+file more.</p>
+
+<pre><code class="bash">$ git commit -m &quot;Add basic functionality to truncate text past 500 characters for each element.&quot;
+</code></pre>
+
+<p>some flags, like &#39;m&#39; for &#39;message&#39; use the following argument (in this case, a quoted string)
+for its value. This way we can just pass a simple commit message inline with the commit
+command.</p>
+
+<h2>Review</h2>
+
+<p>Lets see what we have so far.</p>
+
+<pre><code class="bash">$ git show
+</code></pre>
+
+<p>This shows the latest activity on the branch. We can see our file changes for each commit. </p>
+
+<h2>Just the tip of the iceberg</h2>
+
+<p>Building an application often requires multiple things being worked on at once, while
+maintaining a base/main/preferably-working version.</p>
+
+<p>there is also a need to put those other pieces into the base/main version</p>
+
+<pre><code class="notes">As you develop applications, the need to build out different pieces arises. Even if 
+it&#39;s just you working on a project, being able to work on something, set it aside, and come
+back to it while not blowing up the working copy is pretty handy. 
+
+Even moreso is the need to shove those changes back in. And `git`&#39;s solution for this? 
+</code></pre>
+
+<h1>Branching</h1>
+
+<p>Looks easy </p>
+
+<p><img src="img/git-tree1.jpg" alt="git tree"></p>
+
+<pre><code class="note">make plugin break at closest word to 500 chars
+</code></pre>
+
+<pre><code class="bash">$ git branch nearestWord
+$ git checkout nearestWord
+</code></pre>
+
+<p><img src="img/git-tree1.jpg" alt="git tree"></p>
+
+<p>created a branch of <code>master</code> (the branch we were on) called <code>nearestWord</code>. Then, we switched
+to that new branch by using <code>git checkout</code>. </p>
+
+<p>see all the branches with:</p>
+
+<pre><code class="bash">$ git branch
+</code></pre>
+
+<pre><code class="notes">These branches are identical right now
+</code></pre>
+
+<p>so lets work on the javascript </p>
+
+<pre><code class="javascript">var slice;
+if ( txt &gt; 500 ) {
+  //remove chars after last found space
+  slice = txt.slice( 0, 500 )
+             .replace( /\s([^\s+])+$/, &#39;&#39; );
+  $el.html( slice + &#39;…&#39; );
+}
+</code></pre>
+
+<pre><code class="bash">$ git add src/ellipser.js
+$ git commit -m &quot;remove letters after last space on shortened text to look better&quot;
+</code></pre>
+
+<p>Let&#39;s leave that be for now -  our working tree is clean, so we can switch over to master.</p>
+
+<pre><code class="bash">$ git checkout master
+</code></pre>
+
+<pre><code class="notes">add another feature. Let&#39;s fix that whole &quot;500 characters&quot; thing.
+
+As we like to do for sanity sake, make a new branch and check it out:
+</code></pre>
+
+<pre><code class="bash">$ git checkout -b variable
+</code></pre>
+
+<p><code>-b</code> stands for <code>branch</code> - this lets you create and switch to a branch in one line</p>
+
+<p><img src="img/git-tree1.jpg" alt="git tree"></p>
+
+<pre><code class="notes">So, as you can expect, this new branch won&#39;t have our new changes from `nearestWord`
+in it.
+</code></pre>
+
+<pre><code class="javascript"> $.fn.ellipser = function( amount ) {
+    amount = amount || 500;
+    return this.each(function() {
+      var $el = $( this );
+      var txt = $el.html();
+      // shorten the text to only 500 chars
+      if ( txt &gt; amount ) {
+        $el.html( txt.slice(0,amount) + &#39;…&#39; );
+  // ...
+}
+</code></pre>
+
+<pre><code>$ git add src/ellipser.js
+$ git commit -m &quot;Update ellipser to accept how many characters to show&quot;
+</code></pre>
+
+<p>let&#39;s assume this new feature is done, tested, etc and we want to incorporate
+it into master</p>
+
+<pre><code>$ git checkout master
+$ git merge variable
+</code></pre>
+
+<p>merge takes the <code>variable</code> branch and stuffs it into the current branch</p>
+
+<pre><code class="notes">We&#39;ve switched back to master, which is our new working tree. When we specify to 
+merge variable, we are literally saying &quot;merge variable&#39;s changes into the current 
+branch&quot;. 
+
+Since, upon merging content into master, those lines haven&#39;t been changed by any other 
+commits there&#39;s no conflict. However, had we made a change to any of those lines in master and 
+THEN tried to merge in this branch, git wouldn&#39;t know which change we wanted; thus, we would
+have to resolve those ourself. 
+</code></pre>
+
+<h2>Staying in sync</h2>
+
+<p>dealing with long-term branches</p>
+
+<pre><code class="notes">So now we have an issue. We want to hop back to our `nearestWord` branch to work on it,
+but wouldn&#39;t it be great to grab the latest updates to master?
+
+We could just merge in master like we did with the other branch, but that would look weird
+in our timeline - having some commits for the `nearestWord` feature, commits for the 
+variable length feature, and then more `nearestWord` commits. 
+</code></pre>
+
+<p><img src="img/git-tree2.jpg" alt=" merge in master "></p>
+
+<pre><code class="notes">merged in, which is *ok* i guess
+</code></pre>
+
+<p><img src="img/git-tree3.jpg" alt="but back to master"></p>
+
+<pre><code class="notes">ugh, now we&#39;re going to have our commits all over the place
+</code></pre>
+
+<h3>rebase</h3>
+
+<p><img src="img/git-tree4.jpg" alt="but back to master"></p>
+
+<p><img src="img/git-tree5.jpg" alt="but back to master"></p>
+
+<p>could do this manually</p>
+
+<pre><code class="notes">and I&#39;ve actually seen people do this (ok, i&#39;ve done this). They save their completed 
+work somewhere else, make a new branch, and then paste in the new code and commit THAT. It&#39;s
+a novel idea, but not quite ideal. 
+
+Instead of that original commit being based off of way back when we first started the plugin,
+let&#39;s rebase. That will change that source commit to the current commit in master, and then
+re-apply all of our commits as if we just made them. 
+
+Another advantage besides this looking way more sensible in the time-line, is rebasing will
+stop on each commit to resolve a merge conflict. This means if there is some oddity between
+your branch and the new code, you can sensibly address it on a commit by commit basis instead of
+a big lump like in a merge. 
+</code></pre>
+
+<p>easier merging, since every commit is replayed individually </p>
+
+<h2>conflicts</h2>
+
+<p>what do they look like?</p>
+
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+conflicting statement A
+=======
+conflicting statement B
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 4e2b407f501b68f8588λ645acafffa0224b9b78:nearestWord
+</code></pre>
+
+<p>is there any easier way?</p>
+
+<p>Tools like: kdiff3, vimdif, p4merge</p>
+
+<p>basically lets you easily review the conflicts and choose 
+how you want to merge</p>
+
+<h3>fast-forward merge</h3>
+
+<p>just shove the commits from the branch in master</p>
+
+<h3>recursive merge</h3>
+
+<p><img src="img/git-merge-recursive1.jpg" alt="the problem"></p>
+
+<p><img src="img/git-merge-recursive2.jpg" alt="the result"></p>
+
+<p><img src="img/git-merge-recursive3.jpg" alt="how others do it"></p>
+
+<p><img src="img/git-merge-recursive4.jpg" alt="the problem"></p>
+
+<p>git is smart and if there are multiple ancestors of the commit,
+it does a merge on those independently and uses that result in your
+full merge. </p>
+
+<h2>tags</h2>
+
+<p>sometimes you are at a point you want to label</p>
+
+<p><code>git tag v1.0.0</code> </p>
+
+<p>makes the current place you&#39;re at in the repository (the commit) 
+associated with the tag labeled <code>v1.0.0</code>.</p>
+
+<p>this is actually that simple - a tag is a label for a commit. </p>
+
+<p>you can list tags with <code>git tag --list</code></p>
+
+<h2>Glossary</h2>
+
+<h3>commit</h3>
+
+<h3>working tree</h3>
+
+<h3>branch</h3>
+
+<h3>refs</h3>
+
+<p>tags</p>
+
+<p>heads</p>
+
+<h2>checkout</h2>
+
+<p>you have a big repository of commits, grab one</p>
+
+<p><code>git checkout</code> changes your working tree to a specific place in your repository</p>
+
+<ul>
+<li>SHA of a commit</li>
+<li>BRANCH</li>
+<li>TAG</li>
+</ul>
+
+<p>and you can even specify a file!</p>
+
+<p><code>git checkout branchName file</code></p>
+
+<h2>reset</h2>
+
+<p>you <em>can</em> alter where your branch is using reset. For example, to erase the last
+commit you could:</p>
+
+<pre><code class="bash">$ git reset --hard HEAD~1
+</code></pre>
+
+<p>which says reset to the current head minus 1 commit. </p>
+
+<p>you could also put a commit SHA there to reset too. </p>
+
+<h2>Next: Deploy, Deploy, Deploy</h2>
+
+	<script src="dist/presentation.js"></script>
+</body>
+</html>

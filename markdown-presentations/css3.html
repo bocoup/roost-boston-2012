@@ -1,0 +1,596 @@
+<!DoctypE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+        <title>Roost 2012</title>
+        <!--
+  <script src=http://code.jquery.com/jquery.min.js></script>
+  <script src=assets/libs/codemirror/lib/codemirror.js></script>
+  <script src=assets/libs/codemirror/mode/xml/xml.js></script>
+  <script src=assets/libs/codemirror/mode/javascript/javascript.js></script>
+  <script src=assets/libs/codemirror/mode/css/css.js></script>
+  <script src=assets/libs/codemirror/mode/shell/shell.js></script>
+  <script src=assets/libs/codemirror/mode/htmlmixed/htmlmixed.js></script>
+  <link rel=stylesheet href=assets/libs/codemirror/lib/codemirror.css>
+  -->
+  <link rel=stylesheet type=text/css href=dist/built.min.css>
+</head>
+<body>
+	<h1>New in CSS3</h1>
+
+<h4>Dan Heberden</h4>
+
+<h4><a href="mailto:dan@bocoup.com">dan@bocoup.com</a></h4>
+
+<h4>@danheberden</h4>
+
+<pre><code class="notes">designed to be ran in a webkit browser
+</code></pre>
+
+<h3>Pseudo-element selectors</h3>
+
+<pre><code class="css">a:hover {
+    background: black;
+    color: snow;
+}
+</code></pre>
+
+<pre><code class="html-run-only">&lt;style&gt;
+a:hover {
+    background: black;
+    color: snow;
+}
+&lt;/style&gt;
+&lt;a href=&quot;http://bocoup.com/&quot;&gt;Bocoup.com&lt;/a&gt;
+</code></pre>
+
+<pre><code class="css">ul li:nth-child(3n){
+ color: red;
+ font-weight: bold;
+}
+</code></pre>
+
+<pre><code class="html-run-only">&lt;style&gt;
+ul.css-selector-example li:nth-child(3n){
+ color: red;
+ font-weight: bold;
+}
+&lt;/style&gt;
+&lt;ul class=&quot;css-selector-example&quot;&gt;
+    &lt;li&gt;first
+    &lt;li&gt;second
+    &lt;li&gt;third
+    &lt;li&gt;fourth
+    &lt;li&gt;fifth
+    &lt;li&gt;sixth
+    &lt;li&gt;seventh
+    &lt;li&gt;eigth
+    &lt;li&gt;ninth
+&lt;/ul&gt;
+</code></pre>
+
+<pre><code class="css">ul li:nth-child(3n+2){
+ color: red;
+ font-weight: bold;
+}
+</code></pre>
+
+<pre><code class="html-run-only">&lt;style&gt;
+ul.css-selector-example2 li:nth-child(3n+2){
+ color: red;
+ font-weight: bold;
+}
+&lt;/style&gt;
+&lt;ul class=&quot;css-selector-example2&quot;&gt;
+    &lt;li&gt;first
+    &lt;li&gt;second
+    &lt;li&gt;third
+    &lt;li&gt;fourth
+    &lt;li&gt;fifth
+    &lt;li&gt;sixth
+    &lt;li&gt;seventh
+    &lt;li&gt;eigth
+    &lt;li&gt;ninth
+&lt;/ul&gt;
+</code></pre>
+
+<h3>More pseudo-element selectors</h3>
+
+<ul>
+<li>:first-child</li>
+<li>:nth-child</li>
+<li>:link</li>
+<li>:visited</li>
+<li>:hover</li>
+<li>:active</li>
+<li>:focus</li>
+<li>:lang</li>
+<li>:first-line</li>
+<li>:first-letter</li>
+<li>:before</li>
+<li>:after</li>
+</ul>
+
+<h2>CSS Specificity</h2>
+
+<pre><code class="css">.special {
+    color: red;
+}
+div { 
+    color: blue;
+}
+</code></pre>
+
+<pre><code class="html">&lt;div class=&quot;special&quot;&gt;some text&lt;/div&gt;
+</code></pre>
+
+<pre><code class="html-run-only">&lt;div style=&quot;color:red&quot;&gt;some text&lt;/div&gt;
+</code></pre>
+
+<h3>Heirarchy (SELECTOR WARS)</h3>
+
+<ul>
+<li>inline style 1000 points</li>
+<li>#id 100 points</li>
+<li>.class [attribute] :pseudo-class 10 points</li>
+<li>element :before :after 1 point</li>
+</ul>
+
+<p>In a tie, it&#39;s the style that is defined last that wins</p>
+
+<h3>Important</h3>
+
+<p><code>!important</code> always wins</p>
+
+<pre><code class="css">.warning {
+    color: red !important;
+}
+</code></pre>
+
+<pre><code class="html">&lt;div class=&quot;warning&quot; style=&quot;color: blue;&quot;&gt;OH NO&lt;/div&gt;
+</code></pre>
+
+<pre><code class="html-run-only">&lt;div style=&quot;color: red;&quot;&gt;OH NO&lt;/div&gt;
+</code></pre>
+
+<p>It is often a bad idea to use this, since you&#39;ve just ruined any possibility to override styles</p>
+
+<h2>Media Queries</h2>
+
+<p>Not a new concept:</p>
+
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;screen.css&quot; media=&quot;screen&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;print.css&quot; media=&quot;print&quot;&gt;
+</code></pre>
+
+<p>But now they are way coolor:</p>
+
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;small.css&quot;
+      media=&quot;screen and (max-device-width: 480px)&quot;&gt;
+</code></pre>
+
+<p>Any they work in stylesheets too</p>
+
+<pre><code class="css">@media (min-width: 480px) {
+  img {
+    width: 200px;
+  }
+}
+</code></pre>
+
+<p>or something more complex:</p>
+
+<pre><code class="css">@media  only screen and (-webkit-min-device-pixel-ratio: 1.5),
+        only screen and (min--moz-device-pixel-ratio: 1.5),
+        only screen and (-o-device-pixel-ratio: 3/2),
+        only screen and (min-device-pixel-ratio: 1.5) {
+  body {
+        font-size:2em;
+  }
+}
+</code></pre>
+
+<h2>Box Model</h2>
+
+<p><img src="assets/img/boxmodel.png" alt="Box Model"></p>
+
+<h3>Border-box</h3>
+
+<p>setting width can work now!</p>
+
+<pre><code class="css"> -moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+-ms-box-sizing: border-box;
+box-sizing: border-box;
+</code></pre>
+
+<h3>CSS Frameworks</h3>
+
+<ul>
+<li>Blueprint: <a href="http://www.blueprintcss.org/">http://www.blueprintcss.org/</a></li>
+<li>960 Grid System: <a href="http://960.gs/">http://960.gs/</a></li>
+<li>YUI Grids: <a href="http://developer.yahoo.com/yui/">http://developer.yahoo.com/yui/</a></li>
+</ul>
+
+<h1>CSS3</h1>
+
+<p>Cool things like text-shadows</p>
+
+<pre><code class="css">p {
+  font-size: 2em;
+  text-shadow: 3px 3px .1em rgb(255,0,255);
+}
+</code></pre>
+
+<pre><code class="html-run-only">&lt;style&gt;
+p.css3-selector-example {
+  font-size: 2em;
+  text-shadow: 3px 3px .1em rgb(255,0,255);
+}
+&lt;/style&gt;
+&lt;p class=&quot;css3-selector-example&quot;&gt;I have a text shadow&lt;/p&gt;
+</code></pre>
+
+<p>and box shadows </p>
+
+<pre><code class="css">div {
+  color: black;
+  background-color: lightgrey;
+  box-shadow: 10px 5px 0 rgb(255,0,0);
+}
+</code></pre>
+
+<pre><code class="html-run-only">&lt;style&gt;
+div.css3-selector-example {
+    color: black;
+  background-color: lightgrey;
+  box-shadow: 10px 5px 0 rgb(255,0,0);
+}
+&lt;/style&gt;
+&lt;div class=&quot;css3-selector-example&quot;&gt;I have a box shadow&lt;/div&gt;
+</code></pre>
+
+<p>and border radiuses</p>
+
+<pre><code class="css">div {
+  color: black;
+  background-color: rgb(0,255,255);
+  padding: .2em .4em;
+  border-radius: 10px;
+}
+
+div.justTheRight {
+  border-radius: 5px 10px 15px 0px;
+}
+</code></pre>
+
+<pre><code class="html-run-only">&lt;style&gt;
+div.css3-selector-example2 {
+  color: black;
+  background-color: rgb(0,255,255);
+  padding: .2em .4em;
+  border-radius: 10px;
+}
+div.css3-selector-example3 {
+  border-radius: 5px 10px 15px 0px;
+}
+&lt;/style&gt;
+&lt;div class=&quot;css3-selector-example2&quot;&gt;I have a border radius&lt;/div&gt;
+
+</code></pre>
+
+<pre><code class="css">div {
+  -webkit-box-shadow: 0px 0px 4px #ffffff; /* Safari 3-4 */
+  -moz-box-shadow: 0px 0px 4px #ffffff; /* FF 3.5 - 3.6 */
+  box-shadow: 0px 0px 4px #ffffff; /* Opera 10.5, IE9, FF4+, Chrome 10+ */
+}
+
+.gradient {
+  background-color: #444444;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(#999)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #000, #999); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image: -moz-linear-gradient(top, #000, #999); /* FF3.6 */
+  background-image: -ms-linear-gradient(top, #000, #999); /* IE10 */
+  background-image: -o-linear-gradient(top, #000, #999); /* Opera 11.10+ */
+  background-image: linear-gradient(top, #000, #999);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=&#39;#000&#39;, EndColorStr=&#39;#999&#39;); /* IE6-IE9 */
+}
+</code></pre>
+
+<pre><code class="html-run-only">&lt;style&gt;
+div.css3-selector-example3{
+  -webkit-box-shadow: 0px 0px 4px #ffffff; /* Safari 3-4 */
+  -moz-box-shadow: 0px 0px 4px #ffffff; /* FF 3.5 - 3.6 */
+  box-shadow: 0px 0px 4px #ffffff; /* Opera 10.5, IE9, FF4+, Chrome 10+ */
+}
+
+div.css3-selector-example3.gradient {
+    padding: 1em;
+  background-color: #444444;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(#999)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #000, #999); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image: -moz-linear-gradient(top, #000, #999); /* FF3.6 */
+  background-image: -ms-linear-gradient(top, #000, #999); /* IE10 */
+  background-image: -o-linear-gradient(top, #000, #999); /* Opera 11.10+ */
+  background-image: linear-gradient(top, #000, #999);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=&#39;#000&#39;, EndColorStr=&#39;#999&#39;); /* IE6-IE9 */
+}
+&lt;/style&gt;
+&lt;div class=&quot;css3-selector-example3 gradient&quot;&gt;Worth It!&lt;/div&gt;
+</code></pre>
+
+<h3>Don&#39;t memorize these</h3>
+
+<p><a href="http://css3please.com">css3please.com</a></p>
+
+<p><img src="assets/img/css3please.png" alt="css3please.com"></p>
+
+<h2>Web Fonts</h2>
+
+<pre><code class="css">@font-face {
+    font-family: &#39;KingthingsItaliqueRegular&#39;;
+    src: url(&#39;Kingthings_Italique.woff&#39;);
+}
+
+.fancy {
+  font-size: 3em;
+  font-family: &#39;KingthingsItaliqueRegular&#39;;
+}
+</code></pre>
+
+<pre><code class="html-run-only">&lt;style&gt;
+@font-face {
+    font-family: &#39;KingthingsItaliqueRegular&#39;;
+    src: url(&#39;assets/fonts/Kingthings_Italique-webfont.woff&#39;);
+}
+
+.css3-selector-example3.fancy {
+  font-size: 3em;
+ font-family: &#39;KingthingsItaliqueRegular&#39;;
+}
+&lt;/style&gt;
+&lt;div class=&quot;css3-selector-example3 fancy&quot;&gt;Ye Olde Fonte Face&lt;/div&gt;
+</code></pre>
+
+<h3>References</h3>
+
+<p><a href="http://google.com/webfonts">http://google.com/webfonts</a></p>
+
+<p><a href="http://fontsquirrel.com">http://fontsquirrel.com</a></p>
+
+<h3>Web Fonts</h3>
+
+<h4>Formats Supported</h4>
+
+<p><img src="assets/img/font-chart.png" alt="font-chart"></p>
+
+<p>Data from: <a href="http://caniuse.com/#search=font">http://caniuse.com/#search=font</a></p>
+
+<h2>Flexbox</h2>
+
+<p>New ways to define layout</p>
+
+<p>always make the 2nd box full width</p>
+
+<pre><code class="html-run">&lt;style&gt;
+  #flexbox1 {
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+
+    display: -moz-box;
+    -moz-box-orient: horizontal;
+
+    display: box;
+    box-orient: horizontal; 
+
+    background: #555;
+  }
+  #flexbox1 div {
+    background: white;
+    text-align: center;
+    font-size: 3em;
+    margin: 5px;
+  }
+  #flexbox1 .full {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+  }
+&lt;/style&gt;
+&lt;div id=&quot;flexbox1&quot;&gt;
+      &lt;div&gt;one&lt;/div&gt;
+      &lt;div class=&quot;full&quot;&gt;two&lt;/div&gt;
+      &lt;div&gt;three&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<pre><code class="html-run">&lt;style&gt;
+  #flexbox2 {
+
+    display: -webkit-box;
+      -webkit-box-orient: horizontal;
+      -webkit-box-pack: center;
+      -webkit-box-align: center;
+
+        display: -moz-box;
+      -moz-box-orient: horizontal;
+      -moz-box-pack: center;
+      -moz-box-align: center;
+
+      display: box;
+      box-orient: horizontal;
+      box-pack: center;
+      box-align: center;
+
+      height: 300px;
+      background: #CCC;
+    }
+    #flexbox2 textarea {
+        width: 30%;
+        height: 30%;
+    }
+&lt;/style&gt;
+&lt;div id=&quot;flexbox2&quot;&gt;
+    &lt;textarea resize&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h2>Transforms</h2>
+
+<pre><code class="html-run">&lt;style&gt;
+    .tilted {
+      border: solid rgb(255,255,0);
+      padding: .5em;
+      font-size: 2em;
+      -moz-transform: rotate(10deg);
+      -moz-transform-origin: top left;
+      -webkit-transform: rotate(10deg);
+      -webkit-transform-origin: top left;
+      -o-transform: rotate(10deg); 
+      -o-transform-origin: top left;
+      -ms-transform: rotate(10deg);
+      -ms-transform-origin: top left;
+      transform: rotate(10deg);
+      transform-origin: top left;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;tilted&quot;&gt;I&#39;m Tilted!&lt;/div&gt;
+</code></pre>
+
+<h3>Transform functions</h3>
+
+<ul>
+<li>transform: rotate(90deg);</li>
+<li>transform: scale(1, 2);</li>
+<li>transform: skew(30deg, -30deg);</li>
+<li>transform: translate(100px, -50px);</li>
+<li>transform: matrix(a, c, b, d, tx, ty);</li>
+</ul>
+
+<p><a href="http://en.wikipedia.org/wiki/Transformation_matrix">http://en.wikipedia.org/wiki/Transformation_matrix</a></p>
+
+<pre><code class="html-run">&lt;style&gt;
+.warped {
+  -webkit-transform: skewY(10deg) translateX(320px) scale(6, 2);
+  width: 130px;
+}
+&lt;/style&gt;
+&lt;div class=&quot;warped&quot;&gt;Whoa! Crazy!&lt;/div&gt;
+</code></pre>
+
+<h3>Transitions</h3>
+
+<pre><code class="html-run">&lt;style&gt;
+  .transition1 {  
+      -webkit-transition-property: color, border-width;  
+      -webkit-transition-duration: .5s, .2s;
+      color: blue;
+      border: solid red;
+      border-width: 0;
+      font-size: 2em;
+    }
+
+    .transition1:hover {  
+      -webkit-transition-property: color, border-width;  
+      -webkit-transition-duration: .5s, .2s;
+      border-width: 4px;
+      color: white;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;transition1&quot;&gt;Hover Over Me!&lt;/div&gt;
+</code></pre>
+
+<h3>Transforms + Transitions</h3>
+
+<pre><code class="html-run">&lt;style&gt;
+    .transition2 {  
+      -webkit-transition-property: -webkit-transform;  
+      -webkit-transition-duration: .5s;
+      -webkit-transform: skew(0, 0) scaleY(1);
+      -webkit-transform-origin: 50% 50%;
+      width: 280px;
+      font-size: 2em;
+    }
+
+    .transition2:hover {  
+      -webkit-transition-property: -webkit-transform;  
+      -webkit-transition-duration: .5s;
+      -webkit-transform: skew(0, 20deg) scaleY(3);
+    }
+&lt;/style&gt;
+&lt;div class=&quot;transition2&quot;&gt;Hover Over Me!&lt;/div&gt;
+</code></pre>
+
+<h3>Keyframes</h3>
+
+<pre><code class="html-run">&lt;style&gt;
+@-webkit-keyframes colorflash {
+  0% {
+    color: #000; /* black */
+  }
+  40% {
+    color: #fff; /* white */
+  }
+  50% {
+    color: #f00; /* red */
+  }
+  60% {
+    color: #fff; /* white */
+  }
+  100% {
+    color: #000; /* black */
+  }
+}
+
+.keyframes1 {
+    font-size: 3em;
+    text-shadow: 0 0 0;
+    -webkit-animation: colorflash 5s infinite;
+}
+&lt;/style&gt;
+&lt;div class=&quot;keyframes1&quot;&gt;Color Flash!&lt;/div&gt;
+</code></pre>
+
+<h3>Keyframes + Transforms</h3>
+
+<pre><code class="html-run">&lt;style&gt;
+@-webkit-keyframes spinning {
+  from {
+    -webkit-transform: rotate(360deg);
+  }
+  to {
+    -webkit-transform: rotate(0);
+  }
+}
+.spinning {
+  float: left;
+  -webkit-animation: spinning 3s infinite linear;
+}
+&lt;/style&gt;
+&lt;img src=&quot;assets/img/bob.png&quot; class=&quot;spinning&quot;&gt;
+&lt;img src=&quot;assets/img/bob.png&quot; class=&quot;spinning&quot;&gt;
+&lt;img src=&quot;assets/img/bob.png&quot; class=&quot;spinning&quot;&gt;
+&lt;img src=&quot;assets/img/bob.png&quot; class=&quot;spinning&quot;&gt;
+</code></pre>
+
+<h2>With JavaScript</h2>
+
+<p>When the browser is done animating an element, it fires an 
+event. </p>
+
+<p>For webkit, it&#39;s <code>webkitTransitionEnd</code>. Opera is <code>oTransitionEnd</code> and all
+other browsers is just <code>transitionEnd</code>. </p>
+
+<p>The event itself offers information like <code>propertyName</code> for what property
+was animated and, of course, the actual element (<code>event.target</code>) that was
+animated. </p>
+
+<h1>thank you!</h1>
+
+<p>Dan Heberden
+<a href="mailto:dan@bocoup.com">dan@bocoup.com</a>
+@danheberden</p>
+
+	<script src="dist/presentation.js"></script>
+</body>
+</html>

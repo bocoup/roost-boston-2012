@@ -1,0 +1,253 @@
+<!DoctypE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+        <title>Roost 2012</title>
+        <!--
+  <script src=http://code.jquery.com/jquery.min.js></script>
+  <script src=assets/libs/codemirror/lib/codemirror.js></script>
+  <script src=assets/libs/codemirror/mode/xml/xml.js></script>
+  <script src=assets/libs/codemirror/mode/javascript/javascript.js></script>
+  <script src=assets/libs/codemirror/mode/css/css.js></script>
+  <script src=assets/libs/codemirror/mode/shell/shell.js></script>
+  <script src=assets/libs/codemirror/mode/htmlmixed/htmlmixed.js></script>
+  <link rel=stylesheet href=assets/libs/codemirror/lib/codemirror.css>
+  -->
+  <link rel=stylesheet type=text/css href=dist/built.min.css>
+</head>
+<body>
+	<h1>Deploy, Deploy, Deploy</h1>
+
+<p>Dan Heberden - @danheberden - bocoup.com</p>
+
+<h2>communicating with other repositories</h2>
+
+<p>a git repository is still just a folder with a .git directory in it, regardless of where it is</p>
+
+<h3>remotes</h3>
+
+<p>lets you label repositories! </p>
+
+<pre><code class="bash">$ git remote add rebecca ~/Projects/BigCompanyServer/rebecca/projectA
+</code></pre>
+
+<p>means &quot;rebecca&quot; points to our shared network source directory</p>
+
+<h3>yeah, but how the hell is <em>that</em> useful?</h3>
+
+<p>what if Rebecca emailed me to say that her branch has a change to be merged in?</p>
+
+<h2>fetch</h2>
+
+<p>git has a place to keep remote repositories</p>
+
+<pre><code class="bash">$ git fetch rebecca
+</code></pre>
+
+<p>updates our ref &quot;rebecca&quot; so that we have the content locally</p>
+
+<p>oh, you want to use that content? </p>
+
+<pre><code class="bash">$ git merge rebecca/feature1
+</code></pre>
+
+<p>&quot;merge branch &quot;feature1&quot; from remote &quot;rebecca&quot; </p>
+
+<h1>this opens a whole new world</h1>
+
+<p>Ok, but my co-workers and me aren&#39;t on a shared server</p>
+
+<p>Fine, lets do better</p>
+
+<h2>&quot;Actual&quot; remotes</h2>
+
+<p>server on linode? rackspace? your uncles basement?</p>
+
+<p>have you ever used scp?</p>
+
+<pre><code class="bash">$ scp ~/myFile.txt danheberden@danheberden.com:/var/www/danheberden.com/myFile.txt
+</code></pre>
+
+<p>copy the file &quot;myFile.txt to danheberden.com at the specified folder</p>
+
+<p>seems reasonable - if we can connect to any remote server that we have ssh access too
+with <code>username@domain.comOrIpAdress</code> then it stands to reason that another process 
+on our machine could, right?</p>
+
+<pre><code class="bash">$ git remote add theServer danheberden@somecoolserver.com:/var/www/myWebsite
+</code></pre>
+
+<p>now we can communicate with our remote server just like we did with the locally
+available folder</p>
+
+<h2>push</h2>
+
+<p>if we make changes that we want to send to the remote, use push.</p>
+
+<pre><code class="bash">git push theServer master
+</code></pre>
+
+<p>if we&#39;re adding a branch for the first time, let git know to track it</p>
+
+<pre><code class="bash">git push theServer -u someNewBranch
+</code></pre>
+
+<p>imagine, though, a web service that hosted your git project</p>
+
+<h2>github.com</h2>
+
+<p><code>github.com</code> lets you create repositories (remotes) and push to them, but
+also has a really nice web interface and allows you to comment on things 
+(among other great features)</p>
+
+<p>lets you have public repos for free?!</p>
+
+<p>lets you have private repo&#39;s, but gonna cost you some $$$</p>
+
+<p>Ok, that&#39;s cool but how can it help my workflow? </p>
+
+<h2>part of deployment is working with other people</h2>
+
+<p>so lets do some live work</p>
+
+<p>edit <a href="http://roost.bocoup.com/">http://roost.bocoup.com/</a> from bocoup&#39;s repo</p>
+
+<p>make a branch (because all new features or bug fixes or just about any
+new work should be done in a branch)</p>
+
+<p>edit the index page</p>
+
+<p>verify that it works locally</p>
+
+<p>push the new branch to github.com</p>
+
+<p>submit a pull request</p>
+
+<p>wait for our coworker to make sure that it works, is sensible, etc</p>
+
+<p>decide that it&#39;s worth merging in</p>
+
+<p>could you do that as efficiently, track-able and organized without git? </p>
+
+<h2>wow - ok, could it get any better than that?</h2>
+
+<p>totally. </p>
+
+<h3>part one - making the direct push better</h3>
+
+<p>post-receive</p>
+
+<p>git lets us change some important pieces of how it works, namely where
+the working tree actually is</p>
+
+<h2>GIT_WORK_TREE</h2>
+
+<p>using this environment variable, we can have our <code>.git</code> directory in 
+one folder and the actual <em>contents</em> (the working tree) of it in another. </p>
+
+<p>git has various hooks in .git/hooks that get executed when particular
+actions get invoked. <code>pre-receive</code> is the most common one. It runs whenever the remote 
+gets a push to it. These are, by default, bash scrips. So we <em>could</em> do something
+like this:</p>
+
+<pre><code class="bash">#!/bin/sh
+# pre-receive
+
+# go to where our git project is (NOT served to the web)
+cd /var/www/gits/myProject
+# set the work tree to our webserver directory
+# and checkout master so that the work-tree gets
+# the git files
+GIT_WORK_TREE=/var/www/myProject.com git checkout master
+
+### part two - automated
+
+listen for post-receive hooks from github.com:
+
+[http://github.com/danheberden/gith](http://github.com/danheberden/gith)
+
+```javascript
+var gith = require( &#39;gith&#39; ).create( 9001 );
+var cp = require( &#39;child_process&#39; );
+
+gith({
+  repo: &#39;bocoup/roost&#39;,
+  branch: &#39;master&#39;
+}).on( &#39;*&#39;, function( payload ) {
+  var commands = [
+    &#39;GIT_WORK_TREE=/var/www/roost.com git --git-dir=/var/www/gits/roost checkout master&#39;
+  ];
+  cp.exec( commands.join(&#39;;&#39;), function(){
+    console.log( &#39;UPDATED THE WEBSITE!&#39; );
+  });
+});
+</code></pre>
+
+<h2>A final note about remotes</h2>
+
+<p>If you have access to a git repository and want to download a copy of it, that
+process is called &quot;cloning&quot;.</p>
+
+<pre><code class="bash">git clone http://github.com/jquery/jquery
+</code></pre>
+
+<p>this automatically sets up the location you clone from as a remote for you, 
+with the label &quot;origin&quot;. </p>
+
+<p>If you ever see &quot;origin&quot; or &quot;upstream&quot; - these are just remotes. They just
+happen to be really common because they are default names used by git and github.com</p>
+
+<p>github.com has the feature to copy a repository you don&#39;t own into your own
+github account so that you can make changes. This is called</p>
+
+<h2>forking</h2>
+
+<p>Forking is the same as cloning a repo you have READ access to, making a new
+repository on github.com, and pushing the contents of that copy to the new repo
+you made. Github.com just made it way easier.</p>
+
+<p>So when you clone YOUR repository, git of course adds the &quot;origin&quot; remote with 
+YOUR github.com uri. </p>
+
+<p>However, you will most likely want to get future changes to the original
+repository - github.com calls this the &quot;upstream&quot; repository; the one you 
+originally forked from. So add that remote:</p>
+
+<pre><code class="bash">git add remote upstream http://github.com/whateverAccount/andRepo
+</code></pre>
+
+<p>now you can pull upstream, add it to your code, and update your own 
+origin with the updates (and preferably, the branches of all the great
+code you&#39;ve been writing). </p>
+
+<h2>pull requests</h2>
+
+<p>When you&#39;re done with those bug fixes or awesome features for that open-
+source library you&#39;ve been working on, push that branch up to github.com.</p>
+
+<p>Now that your personal github &quot;fork&quot; has that new branch, you can opt to make 
+a &quot;pull request&quot; - that is, a message to the upstream repository that you 
+would like them to incorporate your branch into their master (you can actually
+specify what branches). </p>
+
+<p>It&#39;s just a nice way to organize/track/submit/review changes that you&#39;ve made 
+against someone else&#39;s project. We at bocoup.com use this internally, even on 
+the same repository:</p>
+
+<p>I make a branch to fix an issue, say, issue 59. So I make a branch called &quot;issue<em>59&quot;.
+When I commit the fix, I add #59 in my commit message. I then push the branch up
+to github.com on our bocoup owned repository. Even though I <em>can</em> merge this into master,
+I want to get company buy in. So I create a pull request from my issue</em>59 branch to 
+master. Everyone at bocoup gets a notice that I want to do this, and reviews my code
+to comment on it with possibly a &quot;looks great!&quot; or &quot;i think this should be different...&quot;
+kind of stuff. </p>
+
+<p>Since I put &quot;#59&quot; in my commit message, github automatically associates that commit
+if you open issue #59 which is a big convenience. I can then merge when I feel the 
+rest of bocoup agrees with my resolution for issue 59 and finally close the issue. </p>
+
+<h1>That&#39;s It - Happy Coding!!!</h1>
+
+	<script src="dist/presentation.js"></script>
+</body>
+</html>
