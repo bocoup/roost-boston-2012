@@ -1,0 +1,138 @@
+
+body, html, #stage { height: 100%; margin:0; padding: 0; width:100%; max-width: none; }
+body, #stage { overflow: hidden; }
+#stage { position: relative; }
+#content { display: none; }
+#content.render-off-stage {
+  display:block;
+  position:absolute;
+  top: 9000px;
+}
+#playground {
+  display: block;
+  position: absolute;
+  top: 9000px;
+  left: 0px;
+  width: 100%;
+}
+.stage-pane {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  -webkit-transform: translate3d( 0%, 0, 0);
+    -moz-transform: translatex( 0% );
+  display:-webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  text-align:center;
+  overflow: hidden;
+}
+.stage-pane-animate {
+  -webkit-transition: all 0.8s ease-in-out;
+  -moz-transition: all 0.8s ease-in-out;
+  -o-transition: all 0.8s ease-in-out;
+  -ms-transition: all 0.8s ease-in-out;
+  transition: all 0.8s ease-in-out;
+}
+.stage-pane.stage-next1 {
+  -webkit-transform: translate3d( 0, 100%, 0);
+ -moz-transform: translatex( 120% );
+}
+
+.stage-pane.stage-previous1 {
+  z-index:0;
+  -webkit-transform: translate3d( 0, -100%, 0);
+  -moz-transform: translatey( -120% );
+}
+
+.pane-content {
+  width: 100%;
+}
+.pane-content > * {
+  margin-bottom:400px;
+  text-align: center;
+  width:100%;
+}
+.pane-content > ul {
+  text-align: left;
+}
+.pane-content .animate {
+  -webkit-transition: all 0.4s ease-in;
+}
+.pane-content .live {
+  margin-bottom: 0px;
+}
+
+/* prepend stuff */
+.pane-prepend {
+  position: absolute;
+  top: 0px;
+  margin-top: -400px;
+}
+
+.pane-prepend.live {
+  -webkit-transition: all .4s ease-in;
+  -webkit-transition-property: height, margin-top;
+  margin-top:0px;
+}
+.pane-shift {
+  position:absolute;
+  width: 100%;
+  left: 0;
+  margin-top: -0px;
+  -webkit-transition: all .4s ease-in;
+  -webkit-transition-property: height, margin-top;
+}
+.pane-shift.live {
+  margin-top: -400px;
+}
+
+
+.pane-placeholder, .pane-placeholder-shift {
+  height: 0px;
+  -webkit-transition: all 0.4s ease-in;
+  margin-bottom:0px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  padding-bottom:0.4em;
+}
+
+#console {
+  z-index:9000;
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  background: rgba( 255, 255, 255, 0.3 );
+   font-family: 'Droid Sans Mono', monospace, monospace; _font-family: 'courier new', monospace; font-size: 1em;
+   color:#000;
+  text-shadow: none;
+  color:#000;
+  box-shadow: 0 0.4em 0.5em rgba(0,0,0,0.2);
+}
+#console > div {
+  padding:0.2em 0.5em;
+}
+#console > div::before {
+  content: "► ";
+
+.CodeMirror {
+  float: left;
+  width: 96%;
+  border-radius: 5px;
+  background: #EEE;
+  padding: 0.9em 2% 0 ;
+}
+iframe {
+  width: 49%;
+  float: left;
+  height: 300px;
+  border: 1px solid black;
+  border-left: 0px;
+}
+.CodeMirror-scroll {
+  height:auto;
+}
